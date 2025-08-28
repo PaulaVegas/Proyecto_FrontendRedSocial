@@ -14,11 +14,10 @@ const Header = () => {
 	}
 	return (
 		<nav>
-			<h1>Header</h1>
+			<Link to="/">Home</Link>
 			{user ? (
 				<>
 					<button onClick={onLogout}>Logout</button>
-					<Link to="/">Home</Link>
 					<Link to="/profile">Profile | {user.username}</Link>
 				</>
 			) : (
