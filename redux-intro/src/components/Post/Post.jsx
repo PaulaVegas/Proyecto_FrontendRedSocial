@@ -5,9 +5,10 @@ const Post = () => {
 	const { posts } = useSelector((state) => state.posts)
 	return (
 		<>
-			{posts.map((post, index) => (
+        {Array.isArray(posts) && posts.length > 0 ? (
+			posts.map((post, index) => (
 				<div key={post._id} className="post">
-					<Link to={`/post/${post._id}`}>Post nº {index} </Link>
+					<Link to={`/posts/${post._id}`}>Post nº {index} </Link>
 					<p>{post.content}</p>
 					<img
 						src={`http://localhost:3000/${post.post_img}`}
@@ -15,7 +16,10 @@ const Post = () => {
 						width="300px"
 					/>
 				</div>
-			))}
+			))
+        ) : ( 
+        <p>No posts found</p>
+        )}
 		</>
 	)
 }

@@ -5,18 +5,13 @@ import { getAll, reset } from '../../redux/posts/postsSlice'
 
 const Posts = () => {
 	const dispatch = useDispatch()
-	const { isLoading } = useSelector((state) => state.posts)
+	const { isLoading, posts } = useSelector((state) => state.posts)
 
 	useEffect(() => {
-		const fetchPosts = async () => {
-			await dispatch(getAll())
-			await dispatch(reset())
-		}
-
-		fetchPosts()
+		dispatch(getAll())
 	}, [dispatch])
 
-	return <>{isLoading ? 'Cargando...' : <Post />}</>
+	return <>{isLoading ? 'Loading...' : <Post />}</>
 }
 
 export default Posts

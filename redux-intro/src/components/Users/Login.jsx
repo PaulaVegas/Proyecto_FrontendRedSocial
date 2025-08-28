@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, reset } from '../redux/auth/authSlice'
+import { login, reset } from '../../redux/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { notification } from 'antd'
 
