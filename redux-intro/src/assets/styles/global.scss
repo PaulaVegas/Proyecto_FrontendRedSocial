@@ -1,0 +1,37 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+main {
+	padding-top: 60px;
+	min-height: 100vh;
+	padding-bottom: 60px;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: "Poppins", sans-serif;
+	transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+a {
+	color: var(--text);
+	text-decoration: none;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: var(--primary-light);
+	}
+}
+:root {
+	--bg: #fff8f2;
+	--text: #5c4033;
+	--accent: #ff9e80;
+	--primary-light: #ffd8b5;
+	--primary-dark: #ffa45b;
+}

@@ -1,26 +1,20 @@
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux";
+import PostCard from "./PostCard";
 
 const Post = () => {
-	const { posts } = useSelector((state) => state.posts)
+	const { posts } = useSelector((state) => state.posts);
+
+	if (!Array.isArray(posts) || posts.length === 0) {
+		return <p className="no-posts">No posts found</p>;
+	}
+
 	return (
-		<>
-        {Array.isArray(posts) && posts.length > 0 ? (
-			posts.map((post, index) => (
-				<div key={post._id} className="post">
-					<Link to={`/posts/${post._id}`}>Post nº {index} </Link>
-					<p>{post.content}</p>
-					<img
-						src={`http://localhost:3000/${post.post_img}`}
-						alt=""
-						width="300px"
-					/>
-				</div>
-			))
-        ) : ( 
-        <p>No posts found</p>
-        )}
-		</>
-	)
-}
-export default Post
+		<div className="posts-container">
+			{posts.map((post, index) => (
+				<PostCard key={post._id} post={post} index={index} />
+			))}
+		</div>
+	);
+};
+
+export default Post;
