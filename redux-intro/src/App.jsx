@@ -5,6 +5,7 @@ import Register from "./components/Users/Register";
 import Profile from "./components/Users/Profile";
 import PostDetail from "./components/Post/PostDetail";
 import Search from "./components/Search/Search";
+import EditProfile from "./components/Users/EditProfile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 					<Route path="/register" element={<Register />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route path="/posts/:id" element={<PostDetail />} />
 					<Route path="/posts/title/:title" element={<Search />} />
 				</Routes>
