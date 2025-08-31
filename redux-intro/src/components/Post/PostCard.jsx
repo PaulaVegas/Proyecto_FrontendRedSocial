@@ -38,11 +38,15 @@ const PostCard = ({ post }) => {
 			<Link to={`/posts/${post._id}`} className="post-title">
 				<h3>{post.title}</h3>
 			</Link>
-			<p>{post.content}</p>
+			<p className="post-content">{post.content}</p>
 			{post.image && (
-				<img src={`http://localhost:3000/${post.image}`} alt={post.title} />
+				<img
+					className="post-image"
+					src={`http://localhost:3000/${post.image}`}
+					alt={post.title}
+				/>
 			)}
-			<p>By {post.userId?.username || "Unknown"}</p>
+			<p className="post-author">By {post.userId?.username || "Unknown"}</p>
 
 			<LikeButton
 				postId={post._id}

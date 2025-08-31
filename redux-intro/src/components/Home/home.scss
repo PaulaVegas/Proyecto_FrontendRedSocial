@@ -25,24 +25,33 @@
 			font-weight: 500;
 		}
 	}
+}
+.new-post-button-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	cursor: pointer;
+	margin: 2rem 0;
+	padding: 0.5rem 1rem;
+	border-radius: 12px;
+	background-color: #ffd8b5; // naranja clarito
+	transition: transform 0.2s, filter 0.2s;
 
-	.home-posts {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
+	&:hover {
+		transform: scale(1.05);
+		filter: brightness(1.1);
+	}
 
-		@media (min-width: 640px) {
-			grid-template-columns: repeat(2, 1fr);
-			max-width: 90%;
-		}
+	.new-post-text {
+		font-weight: 700;
+		font-size: 1rem;
+		color: var(--accent);
+		user-select: none;
+	}
 
-		@media (min-width: 1024px) {
-			max-width: 95%;
-		}
-
-		@media (min-width: 1440px) {
-			grid-template-columns: repeat(4, 1fr);
-			max-width: 98%;
-		}
+	.new-post-icon {
+		width: 40px;
+		height: 40px;
 	}
 }
