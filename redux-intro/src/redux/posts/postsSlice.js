@@ -9,29 +9,39 @@ const initialState = {
 	post: {},
 };
 
-export const getAll = createAsyncThunk("posts/", async () => {
+export const getAll = createAsyncThunk("posts/getAll", async (_, thunkAPI) => {
 	try {
-		return await postsService.getAll();
+		const posts = await postsService.getAll();
+		return posts;
 	} catch (error) {
-		console.error(error);
+		return thunkAPI.rejectWithValue(
+			error.response?.data?.message || error.message
+		);
 	}
 });
 
-export const getById = createAsyncThunk("posts/:_id", async (id) => {
-	try {
-		return await postsService.getById(id);
-	} catch (error) {
-		console.error(error);
+export const getById = createAsyncThunk(
+	"posts/getById",
+	async (id, thunkAPI) => {
+		try {
+			return await postsService.getById(id);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				error.response?.data?.message || error.message
+			);
+		}
 	}
-});
+);
 
 export const getPostByTitle = createAsyncThunk(
-	"posts/title/:title",
-	async (postTitle) => {
+	"posts/getPostByTitle",
+	async (postTitle, thunkAPI) => {
 		try {
 			return await postsService.getPostByTitle(postTitle);
 		} catch (error) {
-			console.error(error);
+			return thunkAPI.rejectWithValue(
+				error.response?.data?.message || error.message
+			);
 		}
 	}
 );
@@ -42,6 +52,10 @@ export const postsSlice = createSlice({
 	reducers: {
 		reset: (state) => {
 			state.isLoading = false;
+			state.isError = false;
+			state.message = "";
+			state.post = {};
+			state.posts = [];
 		},
 	},
 	extraReducers: (builder) => {
