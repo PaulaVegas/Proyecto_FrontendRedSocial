@@ -8,7 +8,6 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { isSuccess, message, isError } = useSelector((state) => state.auth);
-
 	useEffect(() => {
 		if (isSuccess) {
 			notification.success({
@@ -105,3 +104,4 @@ const Register = () => {
 };
 
 export default Register;
+
