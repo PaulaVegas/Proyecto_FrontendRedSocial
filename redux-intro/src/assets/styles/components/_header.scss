@@ -13,11 +13,16 @@
 	z-index: 1000;
 
 	.icon {
-		width: 24px;
-		height: 24px;
+		width: 20px;
+		height: 20px;
 		object-fit: contain;
+		margin-right: 6px;
+		vertical-align: middle;
 	}
-
+	.ant-drawer .icon {
+		width: 10px;
+		height: 10px;
+	}
 	.header-left {
 		display: flex;
 		align-items: center;

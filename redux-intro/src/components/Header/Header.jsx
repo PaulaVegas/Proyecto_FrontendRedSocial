@@ -7,7 +7,14 @@ import dm_cat from "../../assets/logos/dm_cat.svg";
 import home_cat from "../../assets/logos/home_cat.svg";
 import logo_catsocial from "../../assets/logos/logo_catsocial.svg";
 import pawfile from "../../assets/logos/pawfile.svg";
-import { MenuOutlined } from "@ant-design/icons";
+import {
+	MenuOutlined,
+	HomeOutlined,
+	UserOutlined,
+	LogoutOutlined,
+	LoginOutlined,
+	FormOutlined,
+} from "@ant-design/icons";
 const { Header } = Layout;
 
 const useIsMobile = (breakpoint = 768) => {
@@ -43,29 +50,46 @@ const AppHeader = () => {
 		{
 			label: "Nest",
 			key: "/",
-			icon: <img src={home_cat} alt="home" className="icon" />,
+			icon: isMobile ? (
+				<HomeOutlined />
+			) : (
+				<img src={home_cat} alt="home" className="icon" />
+			),
 			onClick: () => navigate("/"),
 		},
 		user && {
 			label: "Pawfile",
 			key: "/profile",
-			icon: <img src={pawfile} alt="pawfile" className="icon" />,
+			icon: isMobile ? (
+				<UserOutlined />
+			) : (
+				<img src={pawfile} alt="pawfile" className="icon" />
+			),
 			onClick: () => navigate("/profile"),
 		},
 		!user && {
 			label: "Login",
 			key: "/login",
-			icon: <img src={dm_cat} alt="dm" className="icon" />,
+			icon: isMobile ? (
+				<LoginOutlined />
+			) : (
+				<img src={dm_cat} alt="dm" className="icon" />
+			),
 			onClick: () => navigate("/login"),
 		},
 		!user && {
 			label: "Register",
 			key: "/register",
-			icon: <img src={logo_catsocial} alt="catsocial" className="icon" />,
+			icon: isMobile ? (
+				<FormOutlined />
+			) : (
+				<img src={logo_catsocial} alt="catsocial" className="icon" />
+			),
 			onClick: () => navigate("/register"),
 		},
 		user && {
 			label: "Logout",
+			icon: isMobile ? <LogoutOutlined /> : null,
 			key: "/logout",
 			onClick: onLogout,
 		},
