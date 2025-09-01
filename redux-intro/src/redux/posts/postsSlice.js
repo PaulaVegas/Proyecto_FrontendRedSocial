@@ -46,17 +46,6 @@ export const getPostByTitle = createAsyncThunk(
 	}
 );
 
-export const getPostByTitle = createAsyncThunk(
-	"posts/title/:title",
-	async (postTitle) => {
-		try {
-			return await postsService.getPostByTitle(postTitle);
-		} catch (error) {
-			console.error(error);
-		}
-	}
-);
-
 export const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -98,3 +87,4 @@ export const postsSlice = createSlice({
 export const { reset } = postsSlice.actions;
 
 export default postsSlice.reducer;
+
