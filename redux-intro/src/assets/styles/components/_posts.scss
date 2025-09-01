@@ -1,4 +1,5 @@
 @use "../mixins" as m;
+
 .posts-container {
 	display: grid;
 	gap: 1rem;
@@ -16,6 +17,7 @@
 		grid-template-columns: repeat(4, 1fr);
 	}
 }
+
 .post-card {
 	background: var(--primary-light);
 	color: var(--text);
