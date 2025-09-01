@@ -1,0 +1,95 @@
+.app-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1.5rem;
+	background: #ffd8b5;
+	border-bottom: 2px solid #ff9e80;
+	z-index: 1000;
+
+	.icon {
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+	}
+
+	.header-left {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+
+		img {
+			height: 32px;
+		}
+
+		h1 {
+			font-size: 1.2rem;
+			font-weight: 700;
+			color: #5c4033;
+
+			span {
+				color: #ff9e80;
+			}
+		}
+	}
+
+	.header-center {
+		flex: 1;
+		margin: 0 1rem;
+
+		.ant-input {
+			border-radius: 20px;
+			border: 1px solid #ff9e80;
+			padding: 0.3rem 1rem;
+			font-size: 0.9rem;
+			max-width: 400px;
+			height: 32px;
+			&:focus {
+				border-color: #ffa45b;
+				box-shadow: 0 0 0 2px rgba(255, 158, 128, 0.4);
+			}
+		}
+	}
+
+	.header-right {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+		.custom-menu {
+			background: transparent;
+			border-bottom: none;
+
+			.ant-menu-item {
+				font-weight: 600;
+				color: #5c4033;
+
+				&:hover {
+					color: #ff9e80;
+					background: #ffa45b;
+					border-radius: 8px;
+				}
+
+				&.ant-menu-item-selected {
+					color: var(--text);
+					background: #ffa45b;
+					border-radius: 8px;
+				}
+			}
+		}
+
+		.ant-btn {
+			color: #5c4033;
+
+			&:hover {
+				color: #ff9e80;
+			}
+		}
+	}
+}
