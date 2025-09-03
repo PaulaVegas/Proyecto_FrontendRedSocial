@@ -16,7 +16,7 @@ const Posts = () => {
 	if (!posts.length) return <p>No posts found</p>;
 
 	return (
-		<div className="posts-container">
+		<div className="post-container">
 			{posts.map((post) => (
 				<PostCard key={post._id} post={post} refreshPosts={refreshPosts} />
 			))}
@@ -24,4 +24,3 @@ const Posts = () => {
 	);
 };
 export default Posts;
-

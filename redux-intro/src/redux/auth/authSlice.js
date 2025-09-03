@@ -30,6 +30,7 @@ export const authSlice = createSlice({
 			state.message = "";
 		},
 	},
+
 	extraReducers: (builder) => {
 		builder
 			.addCase(login.fulfilled, (state, action) => {
@@ -54,6 +55,9 @@ export const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isError = true;
 				state.message = action.payload;
+			})
+			.addCase(fetchUserInfo.fulfilled, (state, action) => {
+				state.user = action.payload;
 			});
 	},
 });
@@ -88,6 +92,17 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 		console.error(error);
 	}
 });
+
+export const fetchUserInfo = createAsyncThunk(
+	"auth/fetchUserInfo",
+	async (_, thunkAPI) => {
+		try {
+			return await authService.getUserInfo();
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data.message);
+		}
+	}
+);
 
 export const { reset } = authSlice.actions;
 
