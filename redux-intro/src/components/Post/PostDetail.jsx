@@ -26,7 +26,13 @@ const PostDetail = () => {
 	useEffect(() => {
 		if (post) {
 			setLikesCount(post.likes?.length || 0);
-			setLiked(post.likes?.some((id) => id.toString() === userId));
+			setLiked(
+				post.likes?.some((like) => {
+					if (typeof like === "string") return like === userId;
+					if (like?._id) return like._id.toString() === userId;
+					return false;
+				})
+			);
 			setComments(post.commentIds || []);
 		}
 	}, [post, userId]);
@@ -53,13 +59,19 @@ const PostDetail = () => {
 	if (isLoading) return <p className="loading">Loading...</p>;
 	if (!post?._id) return <p className="no-posts">Post not found</p>;
 
+	const imageUrl =
+		post.image &&
+		(post.image.startsWith("http")
+			? post.image
+			: `http://localhost:3000/${post.image}`);
+
 	return (
 		<div className="post-detail-wrapper">
 			<div className="post-detail-card">
 				<h2>{post.title}</h2>
 				<p>{post.content}</p>
-				{post.image && (
-					<img src={`http://localhost:3000/${post.image}`} alt={post.title} />
+				{imageUrl && (
+					<img className="post-image" src={imageUrl} alt={post.title} />
 				)}
 				<p>By {post.userId?.username || "Unknown"}</p>
 

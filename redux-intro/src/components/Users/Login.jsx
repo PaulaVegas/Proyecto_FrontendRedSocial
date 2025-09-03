@@ -24,7 +24,6 @@ const Login = () => {
 
 	const onSubmit = (values) => {
 		dispatch(login(values));
-		console.log("formData", values);
 	};
 
 	return (

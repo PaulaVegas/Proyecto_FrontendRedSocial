@@ -38,6 +38,9 @@ export const authSlice = createSlice({
 				state.token = action.payload.token;
 				state.isSuccess = true;
 				state.message = action.payload.message;
+				localStorage.setItem("token", action.payload.token);
+				localStorage.setItem("user", JSON.stringify(action.payload.user));
+				localStorage.setItem("userId", action.payload.user.id);
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isError = true;
@@ -47,6 +50,9 @@ export const authSlice = createSlice({
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;
 				state.token = null;
+				localStorage.removeItem("token");
+				localStorage.removeItem("user");
+				localStorage.removeItem("userId");
 			})
 			.addCase(register.fulfilled, (state, action) => {
 				state.isSuccess = true;
