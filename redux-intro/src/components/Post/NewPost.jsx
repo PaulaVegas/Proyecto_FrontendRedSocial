@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const NewPost = () => {
+const NewPost = ({ postToEdit = null, onSuccess, onCancel }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState(null);
 	const [preview, setPreview] = useState(null);
 	const token = localStorage.getItem("token");
+
+	useEffect(() => {
+		if (postToEdit) {
+			setTitle(postToEdit.title);
+			setContent(postToEdit.content);
+			setPreview(
+				postToEdit.image ? `http://localhost:3000/${postToEdit.image}` : null
+			);
+		}
+	}, [postToEdit]);
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -17,26 +27,41 @@ const NewPost = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!title.trim() || !content.trim()) return;
+
 		const formData = new FormData();
 		formData.append("title", title);
 		formData.append("content", content);
 		if (image) formData.append("image", image);
+
 		try {
-			await axios.post("http://localhost:3000/posts/newPost", formData, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-					"Content-Type": "multipart/form-data",
-				},
-			});
+			if (postToEdit) {
+				await axios.put(
+					`http://localhost:3000/posts/${postToEdit._id}`,
+					formData,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+							"Content-Type": "multipart/form-data",
+						},
+					}
+				);
+			} else {
+				await axios.post("http://localhost:3000/posts/newPost", formData, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+						"Content-Type": "multipart/form-data",
+					},
+				});
+			}
 
 			setTitle("");
 			setContent("");
 			setImage(null);
 			setPreview(null);
 
-			if (onPostCreated) onPostCreated();
+			if (onSuccess) onSuccess();
 		} catch (error) {
-			console.error("Error creating post:", error);
+			console.error("Error saving post:", error);
 		}
 	};
 
@@ -63,7 +88,14 @@ const NewPost = () => {
 					style={{ maxWidth: "200px", marginTop: "1rem" }}
 				/>
 			)}
-			<button type="submit">Create Post</button>
+			<button type="submit">
+				{postToEdit ? "Update Post" : "Create Post"}
+			</button>
+			{postToEdit && onCancel && (
+				<button type="button" onClick={onCancel} style={{ marginLeft: "1rem" }}>
+					Cancel
+				</button>
+			)}
 		</form>
 	);
 };

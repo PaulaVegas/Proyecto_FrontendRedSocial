@@ -1,15 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchUserInfo } from "../../redux/auth/authSlice";
 import { Card, Avatar, Button, Typography, Row, Col, List } from "antd";
 import defaultAvatar from "../../assets/logos/default-avatar.jpg";
 const { Title, Text } = Typography;
+import PostCard from "../Post/PostCard";
+import axios from "axios";
+import NewPost from "../Post/NewPost";
 
 const Profile = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
+
+	const [editingPost, setEditingPost] = useState(null);
 
 	useEffect(() => {
 		if (!user || !user.followers) {
@@ -18,6 +23,33 @@ const Profile = () => {
 	}, [dispatch, user]);
 
 	if (!user) return <p>Loading...</p>;
+
+	const handleEditPost = (post) => {
+		setEditingPost(post);
+	};
+
+	const handleCancelEdit = () => {
+		setEditingPost(null);
+	};
+
+	const handlePostSaved = () => {
+		// Después de crear o actualizar un post
+		setEditingPost(null);
+		dispatch(fetchUserInfo());
+	};
+
+	const handleDeletePost = async (postId) => {
+		try {
+			const token = localStorage.getItem("token");
+			await fetch(`http://localhost:3000/posts/${postId}`, {
+				method: "DELETE",
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			dispatch(fetchUserInfo());
+		} catch (err) {
+			console.error("Error deleting post:", err);
+		}
+	};
 
 	const renderUserItem = (u) => (
 		<List.Item>
@@ -103,6 +135,35 @@ const Profile = () => {
 							</Card>
 						</Col>
 					</Row>
+					<div className="profile-posts">
+						<h3>My Posts</h3>
+						{editingPost && (
+							<NewPost
+								postToEdit={editingPost}
+								onSuccess={handlePostSaved}
+								onCancel={handleCancelEdit}
+							/>
+						)}
+
+						{user.posts && user.posts.length > 0 ? (
+							<div className="post-container">
+								{user.posts
+									.slice()
+									.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+									.map((post) => (
+										<PostCard
+											key={post._id}
+											post={post}
+											currentUserId={user._id}
+											onEdit={handleEditPost}
+											onDelete={handleDeletePost}
+										/>
+									))}
+							</div>
+						) : (
+							<p>No posts yet</p>
+						)}
+					</div>
 				</div>
 			</Card>
 		</div>
