@@ -2,12 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchUserInfo } from "../../redux/auth/authSlice";
-import { Card, Avatar, Button, Typography, Row, Col, List } from "antd";
+import { Card, Avatar, Button, Row, Col, List } from "antd";
 import defaultAvatar from "../../assets/logos/default-avatar.jpg";
-const { Title, Text } = Typography;
 import PostCard from "../Post/PostCard";
-import axios from "axios";
-import NewPost from "../Post/NewPost";
+import EditModal from "../EditModal";
+import { deletePost } from "../../redux/posts/postsSlice";
 
 const Profile = () => {
 	const navigate = useNavigate();
@@ -33,18 +32,15 @@ const Profile = () => {
 	};
 
 	const handlePostSaved = () => {
-		// Después de crear o actualizar un post
 		setEditingPost(null);
 		dispatch(fetchUserInfo());
 	};
 
-	const handleDeletePost = async (postId) => {
+	const handleDeletePost = async (id) => {
+		if (!window.confirm("Are you sure you want to delete this post?")) return;
+
 		try {
-			const token = localStorage.getItem("token");
-			await fetch(`http://localhost:3000/posts/${postId}`, {
-				method: "DELETE",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			await dispatch(deletePost(id));
 			dispatch(fetchUserInfo());
 		} catch (err) {
 			console.error("Error deleting post:", err);
@@ -137,14 +133,6 @@ const Profile = () => {
 					</Row>
 					<div className="profile-posts">
 						<h3>My Posts</h3>
-						{editingPost && (
-							<NewPost
-								postToEdit={editingPost}
-								onSuccess={handlePostSaved}
-								onCancel={handleCancelEdit}
-							/>
-						)}
-
 						{user.posts && user.posts.length > 0 ? (
 							<div className="post-container">
 								{user.posts
@@ -166,6 +154,15 @@ const Profile = () => {
 					</div>
 				</div>
 			</Card>
+
+			{editingPost && (
+				<EditModal
+					visible={!!editingPost}
+					setVisible={setEditingPost}
+					post={editingPost}
+					onSaved={handlePostSaved}
+				/>
+			)}
 		</div>
 	);
 };

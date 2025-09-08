@@ -3,8 +3,9 @@ import axios from "axios";
 import Posts from "./Posts";
 import NewPost from "./NewPost";
 
-const PostsContainer = () => {
+const PostsContainer = ({ showNewPost, setShowNewPost }) => {
 	const [posts, setPosts] = useState([]);
+	const [totalPages, setTotalPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [limit] = useState(10);
@@ -20,7 +21,8 @@ const PostsContainer = () => {
 				`http://localhost:3000/posts?page=${pageNumber}&limit=${limit}`,
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
-			setPosts(res.data);
+			setPosts(res.data.posts || []);
+			setTotalPages(res.data.totalPages || 1);
 		} catch (err) {
 			console.error("Error fetching posts:", err);
 		} finally {
@@ -49,6 +51,7 @@ const PostsContainer = () => {
 
 	const handleSuccess = () => {
 		setEditingPost(null);
+		setShowNewPost(false);
 		fetchPosts(page);
 	};
 
@@ -57,6 +60,12 @@ const PostsContainer = () => {
 			{editingPost && (
 				<div className="new-post-form-wrapper">
 					<NewPost postToEdit={editingPost} onSuccess={handleSuccess} />
+				</div>
+			)}
+
+			{showNewPost && !editingPost && (
+				<div className="new-post-form-wrapper">
+					<NewPost onSuccess={handleSuccess} />
 				</div>
 			)}
 

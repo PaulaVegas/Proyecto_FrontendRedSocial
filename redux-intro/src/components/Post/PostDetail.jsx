@@ -5,6 +5,7 @@ import { Input, Button, List, Avatar } from "antd";
 import axios from "axios";
 import { getById } from "../../redux/posts/postsSlice";
 import LikeButton from "./LikeButton";
+import EditModal from "../EditModal";
 
 const { TextArea } = Input;
 
@@ -18,6 +19,7 @@ const PostDetail = () => {
 	const [liked, setLiked] = useState(false);
 	const [comments, setComments] = useState([]);
 	const [commentText, setCommentText] = useState("");
+	const [editing, setEditing] = useState(false);
 
 	useEffect(() => {
 		if (id) dispatch(getById(id));
@@ -64,6 +66,14 @@ const PostDetail = () => {
 		(post.image.startsWith("http")
 			? post.image
 			: `http://localhost:3000/${post.image}`);
+	const isOwner =
+		post.userId?._id?.toString() === userId?.toString() ||
+		post.userId?.toString() === userId?.toString();
+
+	const handleSaved = () => {
+		setEditing(false);
+		dispatch(getById(id));
+	};
 
 	return (
 		<div className="post-detail-wrapper">
@@ -82,6 +92,13 @@ const PostDetail = () => {
 					setLiked={setLiked}
 					setLikesCount={setLikesCount}
 				/>
+				{isOwner && (
+					<div style={{ marginTop: "1rem" }}>
+						<Button type="primary" onClick={() => setEditing(true)}>
+							Editar
+						</Button>
+					</div>
+				)}
 
 				<h3>Comments ({comments.length})</h3>
 				<List
@@ -119,6 +136,15 @@ const PostDetail = () => {
 					</Button>
 				</form>
 			</div>
+
+			{editing && (
+				<EditModal
+					visible={editing}
+					setVisible={setEditing}
+					post={post}
+					onSaved={handleSaved}
+				/>
+			)}
 		</div>
 	);
 };

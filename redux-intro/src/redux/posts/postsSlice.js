@@ -46,6 +46,32 @@ export const getPostByTitle = createAsyncThunk(
 	}
 );
 
+export const update = createAsyncThunk(
+	"posts/update",
+	async ({ id, postData }, thunkAPI) => {
+		try {
+			return await postsService.update(id, postData);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				error.response?.data?.message || error.message
+			);
+		}
+	}
+);
+
+export const deletePost = createAsyncThunk(
+	"posts/delete",
+	async (id, thunkAPI) => {
+		try {
+			return await postsService.deletePost(id);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				error.response?.data?.message || error.message
+			);
+		}
+	}
+);
+
 export const postsSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -58,6 +84,7 @@ export const postsSlice = createSlice({
 			state.posts = [];
 		},
 	},
+
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAll.fulfilled, (state, action) => {
@@ -80,6 +107,16 @@ export const postsSlice = createSlice({
 				state.posts = Array.isArray(action.payload)
 					? action.payload
 					: [action.payload];
+			})
+			.addCase(update.fulfilled, (state, action) => {
+				const updated = action.payload;
+				state.posts = state.posts.map((p) =>
+					p._id === updated._id ? updated : p
+				);
+			})
+			.addCase(deletePost.fulfilled, (state, action) => {
+				const id = action.meta.arg;
+				state.posts = state.posts.filter((p) => p._id !== id);
 			});
 	},
 });
@@ -87,4 +124,3 @@ export const postsSlice = createSlice({
 export const { reset } = postsSlice.actions;
 
 export default postsSlice.reducer;
-

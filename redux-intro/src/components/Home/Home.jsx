@@ -20,7 +20,10 @@ const Home = () => {
 					</header>
 
 					<main className="posts-center">
-						<PostsContainer />
+						<PostsContainer
+							showNewPost={showNewPost}
+							setShowNewPost={setShowNewPost}
+						/>
 					</main>
 
 					<div

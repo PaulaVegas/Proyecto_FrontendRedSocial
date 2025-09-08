@@ -1,10 +1,12 @@
 import PostCard from "./PostCard";
 import { useState } from "react";
-import NewPost from "./NewPost";
+import EditModal from "../EditModal";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../redux/posts/postsSlice";
 
-const Posts = ({ posts, refreshPosts, isLoading }) => {
+const Posts = ({ posts = [], refreshPosts, isLoading }) => {
 	const [editingPost, setEditingPost] = useState(null);
-	const currentUserId = localStorage.getItem("userId") || "";
+	const dispatch = useDispatch();
 
 	if (isLoading) return <p>Loading...</p>;
 	if (!posts || posts.length === 0) return <p>No posts found</p>;
@@ -13,40 +15,39 @@ const Posts = ({ posts, refreshPosts, isLoading }) => {
 		.slice()
 		.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-	const handleEdit = (post) => {
-		setEditingPost(post);
-	};
+	const handleEdit = (post) => setEditingPost(post);
 
 	const handleDelete = async (postId) => {
 		if (!window.confirm("Are you sure you want to delete this post?")) return;
-		const token = localStorage.getItem("token");
 		try {
-			await fetch(`http://localhost:3000/posts/${postId}`, {
-				method: "DELETE",
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			await dispatch(deletePost(postId));
 			if (refreshPosts) refreshPosts();
 		} catch (err) {
-			console.error(err);
+			console.error("Error deleting post:", err);
 		}
 	};
 
-	const handleSuccess = () => {
+	const handleSaved = () => {
 		setEditingPost(null);
 		if (refreshPosts) refreshPosts();
 	};
 
-	if (editingPost) {
-		return <NewPost postToEdit={editingPost} onSuccess={handleSuccess} />;
-	}
-
 	return (
 		<div className="post-container">
+			{editingPost && (
+				<EditModal
+					visible={!!editingPost}
+					setVisible={() => setEditingPost(null)}
+					post={editingPost}
+					onSaved={handleSaved}
+				/>
+			)}
+
 			{sortedPosts.map((post) => (
 				<PostCard
 					key={post._id}
 					post={post}
-					currentUserId={currentUserId}
+					currentUserId={localStorage.getItem("userId")}
 					onEdit={handleEdit}
 					onDelete={handleDelete}
 				/>
