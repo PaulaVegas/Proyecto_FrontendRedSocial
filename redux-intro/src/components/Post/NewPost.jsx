@@ -22,6 +22,10 @@ const NewPost = ({ postToEdit = null, onSuccess, onCancel }) => {
 		const file = e.target.files[0];
 		setImage(file);
 		setPreview(file ? URL.createObjectURL(file) : null);
+		if (file.size > 10 * 1024 * 1024) {
+			alert("File too large. Max 10MB.");
+			return;
+		}
 	};
 
 	const handleSubmit = async (e) => {
