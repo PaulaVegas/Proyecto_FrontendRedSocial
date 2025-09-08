@@ -30,6 +30,7 @@ export const authSlice = createSlice({
 			state.message = "";
 		},
 	},
+
 	extraReducers: (builder) => {
 		builder
 			.addCase(login.fulfilled, (state, action) => {
@@ -37,6 +38,9 @@ export const authSlice = createSlice({
 				state.token = action.payload.token;
 				state.isSuccess = true;
 				state.message = action.payload.message;
+				localStorage.setItem("token", action.payload.token);
+				localStorage.setItem("user", JSON.stringify(action.payload.user));
+				localStorage.setItem("userId", action.payload.user.id);
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isError = true;
@@ -46,6 +50,9 @@ export const authSlice = createSlice({
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;
 				state.token = null;
+				localStorage.removeItem("token");
+				localStorage.removeItem("user");
+				localStorage.removeItem("userId");
 			})
 			.addCase(register.fulfilled, (state, action) => {
 				state.isSuccess = true;
@@ -54,6 +61,9 @@ export const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isError = true;
 				state.message = action.payload;
+			})
+			.addCase(fetchUserInfo.fulfilled, (state, action) => {
+				state.user = action.payload;
 			});
 	},
 });
@@ -88,6 +98,17 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 		console.error(error);
 	}
 });
+
+export const fetchUserInfo = createAsyncThunk(
+	"auth/fetchUserInfo",
+	async (_, thunkAPI) => {
+		try {
+			return await authService.getUserInfo();
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data.message);
+		}
+	}
+);
 
 export const { reset } = authSlice.actions;
 

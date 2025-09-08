@@ -1,82 +1,73 @@
 @use "../mixins" as m;
 
-.posts-container {
-	display: grid;
-	gap: 1rem;
-	grid-template-columns: 1fr;
-
-	@include m.respond(sm) {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	@include m.respond(md) {
-		grid-template-columns: repeat(3, 1fr);
-	}
-
-	@include m.respond(lg) {
-		grid-template-columns: repeat(4, 1fr);
-	}
-}
-
-.post-card {
-	background: var(--primary-light);
-	color: var(--text);
-	border-radius: 12px;
-	padding: 0.75rem;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-	transition: transform 0.2s ease;
+.post-container {
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
+	gap: 1rem;
+	width: 100%;
+	align-items: center;
 
-	&:hover {
-		transform: translateY(-2px);
-	}
-
-	.post-title {
-		text-decoration: none;
-		display: block;
-		margin-bottom: 0.4rem;
-
-		h3 {
-			font-size: 1rem;
-			line-height: 1.2;
-			margin: 0;
-			color: var(--accent);
-		}
-
-		&:hover h3 {
-			color: var(--primary-dark);
-		}
-	}
-
-	.post-image {
+	.post-card {
+		background: var(--primary-light);
+		color: var(--text);
+		border-radius: 12px;
+		padding: 0.75rem;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+		transition: transform 0.2s ease;
+		display: flex;
+		flex-direction: column;
 		width: 100%;
-		aspect-ratio: 16/9;
-		object-fit: cover;
-		border-radius: 8px;
-		margin-bottom: 0.5rem;
-		display: block;
-	}
+		max-width: 600px;
+		min-height: auto;
+		&:hover {
+			transform: translateY(-2px);
+		}
 
-	.post-content {
-		font-size: 0.9rem;
-		line-height: 1.4;
-		color: var(--text);
-		margin-bottom: 0.5rem;
-	}
+		.post-title {
+			text-decoration: none;
+			display: block;
+			margin-bottom: 0.4rem;
 
-	.post-author {
-		font-size: 0.8rem;
-		font-style: italic;
-		color: var(--text);
-		margin-top: auto;
-		text-align: right;
-	}
+			h3 {
+				font-size: 1rem;
+				line-height: 1.2;
+				margin: 0;
+				color: var(--accent);
+			}
 
-	.comments-count {
-		font-size: 0.85rem;
-		margin-top: 0.4rem;
-		color: var(--text);
+			&:hover h3 {
+				color: var(--primary-dark);
+			}
+		}
+
+		.post-image {
+			width: 100%;
+			aspect-ratio: 16/9;
+			object-fit: cover;
+			border-radius: 8px;
+			margin-bottom: 0.5rem;
+			display: block;
+		}
+
+		.post-content {
+			font-size: 0.9rem;
+			line-height: 1.4;
+			color: var(--text);
+			margin-bottom: 0.5rem;
+		}
+
+		.post-author {
+			font-size: 0.8rem;
+			font-style: italic;
+			color: var(--text);
+			margin-top: auto;
+			text-align: right;
+		}
+
+		.comments-count {
+			font-size: 0.85rem;
+			margin-top: 0.4rem;
+			color: var(--text);
+		}
 	}
 }

@@ -1,4 +1,3 @@
-import AppLayout from "./components/layout";
 import Home from "./components/Home/Home";
 import Login from "./components/Users/Login";
 import Register from "./components/Users/Register";
@@ -7,6 +6,7 @@ import PostDetail from "./components/Post/PostDetail";
 import Search from "./components/Search/Search";
 import EditProfile from "./components/Users/EditProfile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./components/layout";
 
 function App() {
 	return (

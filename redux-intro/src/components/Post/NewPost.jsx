@@ -1,32 +1,71 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { getAll } from "../../redux/posts/postsSlice";
 
-const NewPost = () => {
+const NewPost = ({ postToEdit = null, onSuccess, onCancel }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [image, setImage] = useState(null);
-	const dispatch = useDispatch();
+	const [preview, setPreview] = useState(null);
 	const token = localStorage.getItem("token");
+
+	useEffect(() => {
+		if (postToEdit) {
+			setTitle(postToEdit.title);
+			setContent(postToEdit.content);
+			setPreview(
+				postToEdit.image ? `http://localhost:3000/${postToEdit.image}` : null
+			);
+		}
+	}, [postToEdit]);
+
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setImage(file);
+		setPreview(file ? URL.createObjectURL(file) : null);
+		if (file.size > 10 * 1024 * 1024) {
+			alert("File too large. Max 10MB.");
+			return;
+		}
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!title.trim() || !content.trim()) return;
+
 		const formData = new FormData();
 		formData.append("title", title);
 		formData.append("content", content);
 		if (image) formData.append("image", image);
 
 		try {
-			await axios.post("http://localhost:3000/posts", formData, {
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			if (postToEdit) {
+				await axios.put(
+					`http://localhost:3000/posts/${postToEdit._id}`,
+					formData,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+							"Content-Type": "multipart/form-data",
+						},
+					}
+				);
+			} else {
+				await axios.post("http://localhost:3000/posts/newPost", formData, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+						"Content-Type": "multipart/form-data",
+					},
+				});
+			}
+
 			setTitle("");
 			setContent("");
 			setImage(null);
-			dispatch(getAll());
+			setPreview(null);
+
+			if (onSuccess) onSuccess();
 		} catch (error) {
-			console.error(error);
+			console.error("Error saving post:", error);
 		}
 	};
 
@@ -44,9 +83,23 @@ const NewPost = () => {
 				value={content}
 				onChange={(e) => setContent(e.target.value)}
 				required
-			></textarea>
-			<input type="file" onChange={(e) => setImage(e.target.files[0])} />
-			<button type="submit">Create Post</button>
+			/>
+			<input type="file" onChange={handleImageChange} name="image" />
+			{preview && (
+				<img
+					src={preview}
+					alt="Preview"
+					style={{ maxWidth: "200px", marginTop: "1rem" }}
+				/>
+			)}
+			<button type="submit">
+				{postToEdit ? "Update Post" : "Create Post"}
+			</button>
+			{postToEdit && onCancel && (
+				<button type="button" onClick={onCancel} style={{ marginLeft: "1rem" }}>
+					Cancel
+				</button>
+			)}
 		</form>
 	);
 };

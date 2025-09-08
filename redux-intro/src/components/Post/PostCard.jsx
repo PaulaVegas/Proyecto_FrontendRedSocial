@@ -1,51 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { message } from "antd";
-import axios from "axios";
 import LikeButton from "./LikeButton";
 
-const PostCard = ({ post }) => {
-	const userId = localStorage.getItem("userId");
+const PostCard = ({ post, currentUserId, onDelete, onEdit }) => {
+	const currentId = currentUserId || localStorage.getItem("userId") || "";
+	const postOwnerId = post.userId?._id ?? post.userId;
+
+	const isOwner =
+		postOwnerId && postOwnerId.toString() === (currentId || "").toString();
+
 	const [likesCount, setLikesCount] = useState(post.likes?.length || 0);
 	const [liked, setLiked] = useState(
-		post.likes?.some((id) => id.toString() === userId)
+		post.likes?.some((id) =>
+			typeof id === "string"
+				? id === currentId
+				: id?._id?.toString() === currentId
+		)
 	);
-	const [commentText, setCommentText] = useState("");
 
-	const commentsCount = post.commentIds?.length || 0;
+	useEffect(() => {
+		setLikesCount(post.likes?.length || 0);
+		setLiked(
+			post.likes?.some((like) =>
+				typeof like === "string"
+					? like === currentId
+					: like?._id?.toString() === currentId
+			)
+		);
+	}, [post, currentId]);
 
-	const handleComment = async (e) => {
-		e.preventDefault();
-		if (!commentText.trim()) return;
-
-		try {
-			await axios.post(
-				"http://localhost:3000/comments/",
-				{ postId: post._id, content: commentText },
-				{
-					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-				}
-			);
-			setCommentText("");
-			message.success("Comment added!");
-		} catch (err) {
-			message.error(err.response?.data?.message || "Error adding comment");
-		}
-	};
+	const imageUrl =
+		post.image &&
+		(post.image.startsWith("http")
+			? post.image
+			: `http://localhost:3000/${post.image}`);
 
 	return (
 		<div className="post-card">
 			<Link to={`/posts/${post._id}`} className="post-title">
 				<h3>{post.title}</h3>
 			</Link>
-			<p className="post-content">{post.content}</p>
-			{post.image && (
-				<img
-					className="post-image"
-					src={`http://localhost:3000/${post.image}`}
-					alt={post.title}
-				/>
+
+			{imageUrl && (
+				<>
+					<img className="post-image" src={imageUrl} alt={post.title} />
+					<p className="post-date">
+						{new Date(post.createdAt).toLocaleDateString("es-ES", {
+							year: "numeric",
+							month: "long",
+							day: "numeric",
+							hour: "2-digit",
+							minute: "2-digit",
+						})}
+					</p>
+				</>
 			)}
+
+			<p className="post-content">{post.content}</p>
 			<p className="post-author">By {post.userId?.username || "Unknown"}</p>
 
 			<LikeButton
@@ -57,18 +68,20 @@ const PostCard = ({ post }) => {
 			/>
 
 			<p className="comments-count">
-				{commentsCount} comment{commentsCount !== 1 ? "s" : ""}
+				{post.commentIds?.length || 0} comment
+				{(post.commentIds?.length || 0) !== 1 ? "s" : ""}
 			</p>
 
-			{/* <form onSubmit={handleComment} style={{ display: "flex", gap: "0.5rem" }}>
-				<input
-					type="text"
-					value={commentText}
-					onChange={(e) => setCommentText(e.target.value)}
-					placeholder="Write a comment..."
-				/>
-				<button type="submit">Comment</button>
-			</form> */}
+			{isOwner && (
+				<div className="post-actions">
+					<button type="button" onClick={() => onEdit && onEdit(post)}>
+						Editar
+					</button>
+					<button type="button" onClick={() => onDelete && onDelete(post._id)}>
+						Borrar
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };

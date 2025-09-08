@@ -1,12 +1,11 @@
 html,
 body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
+	height: auto;
+	min-height: 100%;
+	overflow-y: auto;
 }
 
 main {
-	padding-top: 60px;
 	min-height: 100vh;
 	padding-bottom: 60px;
 	box-sizing: border-box;
