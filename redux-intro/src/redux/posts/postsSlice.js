@@ -124,3 +124,4 @@ export const postsSlice = createSlice({
 export const { reset } = postsSlice.actions;
 
 export default postsSlice.reducer;
+
