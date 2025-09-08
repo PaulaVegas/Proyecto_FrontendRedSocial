@@ -1,3 +1,4 @@
+![banner](./redux-intro/src/assets/images/banner.jpg)
 ![MERN](https://img.shields.io/badge/MERN-Stack-4EA94B?logo=mongodb&logoColor=white&labelColor=000000)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![SASS](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)
