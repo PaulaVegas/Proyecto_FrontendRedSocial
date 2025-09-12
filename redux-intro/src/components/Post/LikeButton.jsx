@@ -4,11 +4,11 @@ import axios from "axios";
 
 const LikeButton = ({ postId, liked, likesCount, setLiked, setLikesCount }) => {
 	const token = localStorage.getItem("token");
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	const handleLike = async () => {
 		try {
 			const res = await axios.post(
-				`http://localhost:3000/posts/${postId}/toggle-like`,
+				`${API_URL}/posts/${postId}/toggle-like`,
 				{},
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);

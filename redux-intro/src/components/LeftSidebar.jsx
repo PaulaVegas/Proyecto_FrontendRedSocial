@@ -3,11 +3,11 @@ import axios from "axios";
 
 const SidebarLeft = () => {
 	const [suggestions, setSuggestions] = useState([]);
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	useEffect(() => {
 		const fetchSuggestions = async () => {
 			try {
-				const res = await axios.get("http://localhost:3000/users/suggestions", {
+				const res = await axios.get(`${API_URL}/users/suggestions`, {
 					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 				});
 				setSuggestions(res.data);
@@ -21,7 +21,7 @@ const SidebarLeft = () => {
 	const handleFollow = async (id) => {
 		try {
 			await axios.post(
-				`http://localhost:3000/users/${id}/follow`,
+				`${API_URL}/users/${id}/follow`,
 				{},
 				{
 					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -41,10 +41,7 @@ const SidebarLeft = () => {
 					<li key={user._id} className="sidebar-user">
 						<div className="sidebar-user-info">
 							{user.avatar ? (
-								<img
-									src={`http://localhost:3000/${user.avatar}`}
-									alt={user.username}
-								/>
+								<img src={`${API_URL}/${user.avatar}`} alt={user.username} />
 							) : (
 								<div className="avatar-placeholder" />
 							)}

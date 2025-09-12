@@ -10,7 +10,7 @@ const PostsContainer = ({ showNewPost, setShowNewPost }) => {
 	const [page, setPage] = useState(1);
 	const [limit] = useState(10);
 	const [editingPost, setEditingPost] = useState(null);
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	const token = localStorage.getItem("token");
 	const currentUserId = localStorage.getItem("userId");
 
@@ -18,7 +18,7 @@ const PostsContainer = ({ showNewPost, setShowNewPost }) => {
 		setIsLoading(true);
 		try {
 			const res = await axios.get(
-				`http://localhost:3000/posts?page=${pageNumber}&limit=${limit}`,
+				`${API_URL}/posts?page=${pageNumber}&limit=${limit}`,
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
 			setPosts(res.data.posts || []);
@@ -36,7 +36,7 @@ const PostsContainer = ({ showNewPost, setShowNewPost }) => {
 
 	const handleDeletePost = async (postId) => {
 		try {
-			await axios.delete(`http://localhost:3000/posts/${postId}`, {
+			await axios.delete(`${API_URL}/posts/${postId}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			setPosts((prev) => prev.filter((p) => p._id !== postId));

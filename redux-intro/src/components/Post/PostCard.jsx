@@ -5,7 +5,7 @@ import LikeButton from "./LikeButton";
 const PostCard = ({ post, currentUserId, onDelete, onEdit }) => {
 	const currentId = currentUserId || localStorage.getItem("userId") || "";
 	const postOwnerId = post.userId?._id ?? post.userId;
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	const isOwner =
 		postOwnerId && postOwnerId.toString() === (currentId || "").toString();
 
@@ -31,9 +31,7 @@ const PostCard = ({ post, currentUserId, onDelete, onEdit }) => {
 
 	const imageUrl =
 		post.image &&
-		(post.image.startsWith("http")
-			? post.image
-			: `http://localhost:3000/${post.image}`);
+		(post.image.startsWith("http") ? post.image : `${API_URL}/${post.image}`);
 
 	return (
 		<div className="post-card">

@@ -12,7 +12,7 @@ const Profile = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	const [editingPost, setEditingPost] = useState(null);
 
 	useEffect(() => {
@@ -53,9 +53,7 @@ const Profile = () => {
 				avatar={
 					<Avatar
 						src={
-							u.profileImage
-								? `http://localhost:3000/${u.profileImage}`
-								: defaultAvatar
+							u.profileImage ? `${API_URL}/${u.profileImage}` : defaultAvatar
 						}
 					/>
 				}
@@ -72,7 +70,7 @@ const Profile = () => {
 						size={120}
 						src={
 							user.profileImage
-								? `http://localhost:3000/${user.profileImage}`
+								? `${API_URL}/${user.profileImage}`
 								: defaultAvatar
 						}
 						alt={user.username}

@@ -14,7 +14,7 @@ const PostDetail = () => {
 	const dispatch = useDispatch();
 	const { post, isLoading } = useSelector((state) => state.posts);
 	const userId = localStorage.getItem("userId");
-
+	const API_URL = import.meta.env.VITE_API_URL;
 	const [likesCount, setLikesCount] = useState(0);
 	const [liked, setLiked] = useState(false);
 	const [comments, setComments] = useState([]);
@@ -45,7 +45,7 @@ const PostDetail = () => {
 
 		try {
 			const res = await axios.post(
-				"http://localhost:3000/comments/",
+				`${API_URL}/comments/`,
 				{ postId: post._id, content: commentText },
 				{
 					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -63,9 +63,7 @@ const PostDetail = () => {
 
 	const imageUrl =
 		post.image &&
-		(post.image.startsWith("http")
-			? post.image
-			: `http://localhost:3000/${post.image}`);
+		(post.image.startsWith("http") ? post.image : `${API_URL}/${post.image}`);
 	const isOwner =
 		post.userId?._id?.toString() === userId?.toString() ||
 		post.userId?.toString() === userId?.toString();
