@@ -10,6 +10,7 @@ const adsData = [
 		link: "#",
 	},
 	{
+
 		text: "New sleeping spots for your cat!",
 		image: sleeping_cat,
 		link: "#",
