@@ -37,7 +37,7 @@ const Register = () => {
 	return (
 		<div className="auth-container">
 			<Card className="auth-card">
-				<h2 className="auth-title">🐱 Create your Pawfile</h2>
+				<h2 className="auth-title">Create your MeowSpace account</h2>
 				<Form layout="vertical" onFinish={onSubmit}>
 					<Form.Item
 						label="First Name"
@@ -104,4 +104,3 @@ const Register = () => {
 };
 
 export default Register;
-

@@ -29,7 +29,7 @@ const Login = () => {
 	return (
 		<div className="auth-container">
 			<Card className="auth-card">
-				<h2 className="auth-title">🐾 Login to MeowSpace</h2>
+				<h2 className="auth-title">Login to MeowSpace</h2>
 				<Form layout="vertical" onFinish={onSubmit}>
 					<Form.Item
 						label="Email"

@@ -12,10 +12,11 @@ const Home = () => {
 			<div className="home-content-wrapper">
 				<div className="home-page">
 					<header className="home-header">
-						<h1>Welcome to MeowSpace 🐾</h1>
+						<h1>🐾 Welcome to MeowSpace 🐾</h1>
 						<p className="home-subtitle">
-							Discover cute posts and share your own adventures with other cat
-							lovers!
+							The first social network made by cat lovers for cat lovers! Share
+							your favorite moments with your feline friends and connect with
+							other cat enthusiasts around the world.
 						</p>
 					</header>
 
