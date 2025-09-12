@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
-const getAll = async () => {
-	const res = await axios.get(`${API_URL}/posts/`);
+
+const getAll = async (page = 1, limit = 10) => {
+	const res = await axios.get(`${API_URL}/posts?page=${page}&limit=${limit}`);
 	return res.data;
 };
 
@@ -11,8 +12,12 @@ const getById = async (id) => {
 	return res.data;
 };
 
-const getPostByTitle = async (title) => {
-	const res = await axios.get(`${API_URL}/posts/title/${title}`);
+const getPostByTitle = async (title, page = 1, limit = 10) => {
+	const res = await axios.get(
+		`${API_URL}/posts/title/${encodeURIComponent(
+			title
+		)}?page=${page}&limit=${limit}`
+	);
 	return res.data;
 };
 

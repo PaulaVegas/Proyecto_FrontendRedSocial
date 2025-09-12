@@ -1,0 +1,85 @@
+.search-results {
+	padding: 2rem;
+
+	.search-title {
+		margin-bottom: 1.5rem;
+		font-size: 1.8rem;
+		text-align: center;
+	}
+
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.post-card {
+		background-color: #fff;
+		border-radius: 12px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		transition: transform 0.2s;
+
+		&:hover {
+			transform: translateY(-5px);
+		}
+
+		.post-image {
+			width: 100%;
+			height: 180px;
+			object-fit: cover;
+		}
+
+		.post-content {
+			padding: 1rem;
+
+			h3 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.2rem;
+			}
+
+			p {
+				margin-bottom: 0.8rem;
+				color: #555;
+			}
+
+			.post-meta {
+				display: flex;
+				justify-content: space-between;
+				font-size: 0.9rem;
+				color: #888;
+			}
+		}
+	}
+
+	.pagination-controls {
+		margin-top: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
+		button {
+			padding: 0.5rem 1rem;
+			border: none;
+			background-color: var(--primary-dark);
+			color: #fff;
+			border-radius: 5px;
+			cursor: pointer;
+
+			&:disabled {
+				background-color: #ccc;
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	.loading,
+	.no-posts {
+		text-align: center;
+		font-size: 1.2rem;
+		color: #555;
+	}
+}
