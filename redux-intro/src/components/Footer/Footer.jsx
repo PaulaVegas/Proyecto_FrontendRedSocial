@@ -9,13 +9,13 @@ const AppFooter = () => {
 		<Footer className="app-footer">
 			<div className="footer-inner">
 				<div className="footer-links">
-					<Link to="/about">Sobre nosotros</Link>
-					<Link to="/cookies">Política de cookies</Link>
-					<Link to="/contact">Contacto</Link>
+					<Link to="/about">About us</Link>
+					<Link to="/cookies">Cookie Policy</Link>
+					<Link to="/contact">Contact</Link>
 				</div>
 				<div className="footer-copy">
 					© {new Date().getFullYear()} MeowSpace 🐾
-					<p>Proyecto de aprendizaje</p>
+					<p>Learning project</p>
 				</div>
 			</div>
 		</Footer>

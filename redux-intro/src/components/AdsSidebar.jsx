@@ -5,17 +5,18 @@ import playing from "../assets/images/playing.jpg";
 
 const adsData = [
 	{
-		text: "Compra snacks para tu gato",
+		text: "Buy snacks for your cat!",
 		image: snacks,
 		link: "#",
 	},
 	{
-		text: "Nueva cama para gatos disponible",
+
+		text: "New sleeping spots for your cat!",
 		image: sleeping_cat,
 		link: "#",
 	},
 	{
-		text: "Juguetes divertidos para tu gato",
+		text: "Buy fun toys for your cat!",
 		image: playing,
 		link: "#",
 	},
@@ -36,9 +37,10 @@ const SidebarAds = ({ interval = 10000 }) => {
 
 	return (
 		<div className="sidebar-ads">
+			<h3>Advertisement</h3>
 			<a href={ad.link} target="_blank" rel="noopener noreferrer">
-				<img src={ad.image} alt={ad.text} />
 				<p>{ad.text}</p>
+				<img src={ad.image} alt={ad.text} />
 			</a>
 		</div>
 	);
