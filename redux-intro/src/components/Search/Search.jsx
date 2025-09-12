@@ -20,8 +20,7 @@ const Search = () => {
 			dispatch(getPostByTitle({ title: title, page: currentPage, limit: 10 }));
 		}
 	}, [dispatch, title, currentPage]);
-	console.log("📥 Posts from Redux store:", posts);
-	console.log("📊 Pagination:", { currentPage, totalPages });
+
 	const handlePrev = () => {
 		if (currentPage > 1) setCurrentPage((prev) => prev - 1);
 	};
