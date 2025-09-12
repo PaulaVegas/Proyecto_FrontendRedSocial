@@ -50,7 +50,9 @@ I developed a frontend with the following features:
 
 #### Backend
 
+
 This project consumes an API available [here](proyectoredsocial-production.up.railway.app) and [here](https://github.com/PaulaVegas/Proyecto_RedSocial.git)
+
 
 #### Frontend
 
@@ -61,3 +63,4 @@ This project consumes an API available [here](proyectoredsocial-production.up.ra
 ## Project URL
 
 Project deployed on Vercel [here](https://proyecto-frontend-red-social.vercel.app/)
+
