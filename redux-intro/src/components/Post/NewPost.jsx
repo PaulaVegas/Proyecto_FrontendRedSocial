@@ -7,14 +7,13 @@ const NewPost = ({ postToEdit = null, onSuccess, onCancel }) => {
 	const [image, setImage] = useState(null);
 	const [preview, setPreview] = useState(null);
 	const token = localStorage.getItem("token");
+	const API_URL = import.meta.env.VITE_API_URL;
 
 	useEffect(() => {
 		if (postToEdit) {
 			setTitle(postToEdit.title);
 			setContent(postToEdit.content);
-			setPreview(
-				postToEdit.image ? `http://localhost:3000/${postToEdit.image}` : null
-			);
+			setPreview(postToEdit.image ? `${API_URL}/${postToEdit.image}` : null);
 		}
 	}, [postToEdit]);
 
@@ -39,18 +38,14 @@ const NewPost = ({ postToEdit = null, onSuccess, onCancel }) => {
 
 		try {
 			if (postToEdit) {
-				await axios.put(
-					`http://localhost:3000/posts/${postToEdit._id}`,
-					formData,
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-							"Content-Type": "multipart/form-data",
-						},
-					}
-				);
+				await axios.put(`${API_URL}/posts/${postToEdit._id}`, formData, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+						"Content-Type": "multipart/form-data",
+					},
+				});
 			} else {
-				await axios.post("http://localhost:3000/posts/newPost", formData, {
+				await axios.post(`${API_URL}/posts/newPost`, formData, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 						"Content-Type": "multipart/form-data",

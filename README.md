@@ -46,7 +46,7 @@ He desarrollado un frontend con las siguientes funcionalidades:
 
 #### Backend
 
-Este proyecto consume una API disponible [aquí](https://github.com/PaulaVegas/Proyecto_RedSocial.git)
+Este proyecto consume una API disponible [aquí](proyectoredsocial-production.up.railway.app) y [aquí](https://github.com/PaulaVegas/Proyecto_RedSocial.git)
 
 #### Frontend
 
