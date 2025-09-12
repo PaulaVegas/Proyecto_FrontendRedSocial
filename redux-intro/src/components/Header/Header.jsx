@@ -50,46 +50,30 @@ const AppHeader = () => {
 		{
 			label: "Nest",
 			key: "/",
-			icon: isMobile ? (
-				<HomeOutlined />
-			) : (
-				<img src={home_cat} alt="home" className="icon" />
-			),
+			icon: <HomeOutlined style={{ fontSize: "16px" }} />,
 			onClick: () => navigate("/"),
 		},
 		user && {
 			label: "Pawfile",
 			key: "/profile",
-			icon: isMobile ? (
-				<UserOutlined />
-			) : (
-				<img src={pawfile} alt="pawfile" className="icon" />
-			),
+			icon: <UserOutlined style={{ fontSize: "16px" }} />,
 			onClick: () => navigate("/profile"),
 		},
 		!user && {
 			label: "Login",
 			key: "/login",
-			icon: isMobile ? (
-				<LoginOutlined />
-			) : (
-				<img src={dm_cat} alt="dm" className="icon" />
-			),
+			icon: <LoginOutlined style={{ fontSize: "16px" }} />,
 			onClick: () => navigate("/login"),
 		},
 		!user && {
 			label: "Register",
 			key: "/register",
-			icon: isMobile ? (
-				<FormOutlined />
-			) : (
-				<img src={logo_catsocial} alt="catsocial" className="icon" />
-			),
+			icon: <FormOutlined style={{ fontSize: "16px" }} />,
 			onClick: () => navigate("/register"),
 		},
 		user && {
 			label: "Logout",
-			icon: isMobile ? <LogoutOutlined /> : null,
+			icon: <LogoutOutlined style={{ fontSize: "16px" }} />,
 			key: "/logout",
 			onClick: onLogout,
 		},

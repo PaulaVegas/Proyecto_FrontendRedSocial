@@ -1,8 +1,10 @@
 import { Layout } from "antd";
 import AppHeader from "./Header/Header";
 import SidebarLeft from "./LeftSidebar";
+import AppFooter from "./Footer/Footer";
+import SidebarAds from "./AdsSidebar";
 
-const { Sider, Content, Footer } = Layout;
+const { Sider, Content } = Layout;
 
 const AppLayout = ({ children }) => {
 	return (
@@ -17,16 +19,11 @@ const AppLayout = ({ children }) => {
 				<Content className="page-main">{children}</Content>
 
 				<Sider width={260} className="sidebar-right">
-					<h3>Publicidad</h3>
-					<p>🐾 ¡Compra snacks para tu gato!</p>
+					<SidebarAds />
 				</Sider>
 			</Layout>
 
-			<Footer className="app-footer">
-				<div className="footer-inner">
-					© {new Date().getFullYear()} MeowSpace 🐾
-				</div>
-			</Footer>
+			<AppFooter />
 		</Layout>
 	);
 };
