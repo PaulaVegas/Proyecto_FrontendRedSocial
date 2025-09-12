@@ -54,6 +54,6 @@ Este proyecto consume una API disponible [aquí](proyectoredsocial-production.up
 2. Instala dependencias `npm i`
 3. Levanta el proyecto con `npm run dev`
 
-## Demo del producto
+## URL del proyecto
 
-_próximamente_
+Proyecto desplegado con Vercel [aquí](https://proyecto-frontend-red-social.vercel.app/)
