@@ -47,7 +47,7 @@ const SidebarLeft = () => {
 							)}
 							<span>@{user.username}</span>
 						</div>
-						<button onClick={() => handleFollow(user._id)}>Seguir</button>
+						<button onClick={() => handleFollow(user._id)}>Follow</button>
 					</li>
 				))}
 			</ul>
