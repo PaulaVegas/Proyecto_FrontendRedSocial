@@ -73,10 +73,10 @@ const PostCard = ({ post, currentUserId, onDelete, onEdit }) => {
 			{isOwner && (
 				<div className="post-actions">
 					<button type="button" onClick={() => onEdit && onEdit(post)}>
-						Editar
+						Edit
 					</button>
 					<button type="button" onClick={() => onDelete && onDelete(post._id)}>
-						Borrar
+						Delete
 					</button>
 				</div>
 			)}

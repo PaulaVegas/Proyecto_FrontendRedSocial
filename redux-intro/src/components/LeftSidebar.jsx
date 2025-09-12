@@ -35,7 +35,7 @@ const SidebarLeft = () => {
 
 	return (
 		<aside className="sidebar-left">
-			<h3>Sugerencias</h3>
+			<h3>People you may know</h3>
 			<ul className="suggestions-list">
 				{suggestions.map((user) => (
 					<li key={user._id} className="sidebar-user">

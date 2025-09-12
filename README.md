@@ -5,55 +5,59 @@
 ![JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![VSCode](https://img.shields.io/badge/Editor-VSCode-blue?logo=visualstudiocode)
 
-# Introducción
+# Introduction
 
-Proyecto individual final del sprint de Frontend en el que se combinan los conocimientos adquiridos en el stack MERN.
+Final individual project of the Frontend sprint, developed using the knowledge acquired in the MERN stack.
 
-## Descripción del proyecto
+## Project Description
 
-He desarrollado un frontend con las siguientes funcionalidades:
+I developed a frontend with the following features:
 
-- Registro y login de usuarios.
-- Vista de posts de todos los usuarios en la frontpage.
-  - PostDetail de cada uno de ellos.
-- Like/dislike en posts y comments.
-- Visionado del perfil de usuario junto con sus posts, followers, following, capacidad de editar posts propios, y más.
-- Buscador y filtrado de posts.
-- CRUD completo de posts
+- User registration and login.
+- View posts from all users on the frontpage.
+  - PostDetail for each one.
+- Like/dislike on posts and comments.
+- View user profiles along with their posts, followers, following, ability to edit own posts, and more.
+- Post search and filtering
+- Full CRUD for posts
 - Responsive.
-- Subida de imágenes a través de Cloudinary.
+- Image upload via Cloudinary
 
-## Tecnologías y librerías utilizadas
+## Tecnh Stack
 
 - Frontend
 
-  - React-Redux – Biblioteca principal para construir la interfaz de usuario.
+  - React-Redux – Main library to build the user interface.
 
-  - React Router DOM – Enrutamiento en aplicaciones SPA.
+  - React Router DOM – Routing in SPA applications.
 
-  - Ant Design (AntD) – Librería de componentes UI.
+  - Ant Design (AntD) – UI component library.
 
-  - Axios – Cliente HTTP para consumir APIs.
+  - Axios – HTTP client to consume APIs.
 
-  - Sass – Preprocesador CSS para estilos más organizados y escalables.
+  - Sass – CSS preprocessor for more organized and scalable styles.
 
-- Herramientas de desarrollo
-  - Vite – Herramienta rápida para desarrollo y build de aplicaciones frontend.
+- Dev Tools
+  - Vite – Fast tool for frontend development and build.
 
-## Instalación
+- Deployment
+  - Vercel
 
-⚠️ **Atención:**
+
+## Instalation
+
+⚠️ **Attention:**
 
 #### Backend
 
-Este proyecto consume una API disponible [aquí](proyectoredsocial-production.up.railway.app) y [aquí](https://github.com/PaulaVegas/Proyecto_RedSocial.git)
+This project consumes an API available [here](proyectoredsocial-production.up.railway.app) and [here](https://github.com/PaulaVegas/Proyecto_RedSocial.git)
 
 #### Frontend
 
-1. Clona este proyecto
-2. Instala dependencias `npm i`
-3. Levanta el proyecto con `npm run dev`
+1. Clone this project
+2. Install dependencies `npm i`
+3. Run the project `npm run dev`
 
-## URL del proyecto
+## Project URL
 
-Proyecto desplegado con Vercel [aquí](https://proyecto-frontend-red-social.vercel.app/)
+Project deployed on Vercel [here](https://proyecto-frontend-red-social.vercel.app/)
