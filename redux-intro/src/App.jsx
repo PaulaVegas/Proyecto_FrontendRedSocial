@@ -7,22 +7,34 @@ import Search from "./components/Search/Search";
 import EditProfile from "./components/Users/EditProfile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout";
+import PrivateZone from "./guards/PrivateZone";
+import NotFound from "./components/NotFound";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<AppLayout>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/register" element={<Register />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/edit-profile" element={<EditProfile />} />
-					<Route path="/posts/:id" element={<PostDetail />} />
-					<Route path="/posts/title/:title" element={<Search />} />
-				</Routes>
-			</AppLayout>
-		</BrowserRouter>
+		<>
+			<BrowserRouter>
+				<AppLayout>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/login" element={<Login />} />
+						<Route
+							path="/profile"
+							element={
+								<PrivateZone>
+									<Profile />
+								</PrivateZone>
+							}
+						/>
+						<Route path="/edit-profile" element={<EditProfile />} />
+						<Route path="/posts/:id" element={<PostDetail />} />
+						<Route path="/posts/title/:title" element={<Search />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</AppLayout>
+			</BrowserRouter>
+		</>
 	);
 }
 export default App;

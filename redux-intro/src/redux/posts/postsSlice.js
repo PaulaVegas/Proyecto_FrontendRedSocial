@@ -3,22 +3,27 @@ import postsService from "./postsService";
 
 const initialState = {
 	posts: [],
+	page: 1,
+	totalPages: 1,
+	totalPosts: 0,
 	isLoading: false,
 	isError: false,
 	message: "",
 	post: {},
 };
 
-export const getAll = createAsyncThunk("posts/getAll", async (_, thunkAPI) => {
-	try {
-		const posts = await postsService.getAll();
-		return posts;
-	} catch (error) {
-		return thunkAPI.rejectWithValue(
-			error.response?.data?.message || error.message
-		);
+export const getAll = createAsyncThunk(
+	"posts/getAll",
+	async ({ page = 1, limit = 10 } = {}, thunkAPI) => {
+		try {
+			return await postsService.getAll(page, limit);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				error.response?.data?.message || error.message
+			);
+		}
 	}
-});
+);
 
 export const getById = createAsyncThunk(
 	"posts/getById",
@@ -35,9 +40,9 @@ export const getById = createAsyncThunk(
 
 export const getPostByTitle = createAsyncThunk(
 	"posts/getPostByTitle",
-	async (postTitle, thunkAPI) => {
+	async ({ title, page = 1, limit = 10 }, thunkAPI) => {
 		try {
-			return await postsService.getPostByTitle(postTitle);
+			return await postsService.getPostByTitle(title, page, limit);
 		} catch (error) {
 			return thunkAPI.rejectWithValue(
 				error.response?.data?.message || error.message
@@ -77,20 +82,26 @@ export const postsSlice = createSlice({
 	initialState,
 	reducers: {
 		reset: (state) => {
+			state.posts = [];
+			state.page = 1;
+			state.totalPages = 1;
+			state.totalPosts = 0;
 			state.isLoading = false;
 			state.isError = false;
 			state.message = "";
 			state.post = {};
-			state.posts = [];
 		},
 	},
 
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAll.fulfilled, (state, action) => {
-				state.posts = action.payload || [];
 				state.isLoading = false;
 				state.isError = false;
+				state.posts = action.payload.posts || [];
+				state.page = action.payload.page || 1;
+				state.totalPages = action.payload.totalPages || 1;
+				state.totalPosts = action.payload.totalPosts || 0;
 			})
 			.addCase(getAll.pending, (state) => {
 				state.isLoading = true;
@@ -104,9 +115,20 @@ export const postsSlice = createSlice({
 				state.post = action.payload;
 			})
 			.addCase(getPostByTitle.fulfilled, (state, action) => {
-				state.posts = Array.isArray(action.payload)
-					? action.payload
-					: [action.payload];
+				state.isLoading = false;
+				state.isError = false;
+				state.posts = action.payload.posts || [];
+				state.page = action.payload.page || 1;
+				state.totalPages = action.payload.totalPages || 1;
+				state.totalPosts = action.payload.totalPosts || 0;
+			})
+			.addCase(getPostByTitle.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getPostByTitle.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload || "Error fetching posts by title";
 			})
 			.addCase(update.fulfilled, (state, action) => {
 				const updated = action.payload;
@@ -124,4 +146,3 @@ export const postsSlice = createSlice({
 export const { reset } = postsSlice.actions;
 
 export default postsSlice.reducer;
-
