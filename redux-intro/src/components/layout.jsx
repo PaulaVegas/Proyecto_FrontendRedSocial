@@ -1,26 +1,37 @@
 import { Layout } from "antd";
+import { useLocation } from "react-router-dom";
 import AppHeader from "./Header/Header";
-import SidebarLeft from "./LeftSidebar";
+import SidebarLeft from "./Sidebars/LeftSidebar";
 import AppFooter from "./Footer/Footer";
-import SidebarAds from "./AdsSidebar";
+import SidebarAds from "./Sidebars/AdsSidebar";
 
 const { Sider, Content } = Layout;
 
 const AppLayout = ({ children }) => {
+	const location = useLocation();
+
+	const hideSidebars = ["/login", "/register"];
+
+	const isAuthPage = hideSidebars.includes(location.pathname);
+
 	return (
 		<Layout className="app-layout">
 			<AppHeader />
 
 			<Layout className="app-content">
-				<Sider width={260} className="sidebar-left">
-					<SidebarLeft />
-				</Sider>
+				{!isAuthPage && (
+					<Sider width={260} className="sidebar-left">
+						<SidebarLeft />
+					</Sider>
+				)}
 
 				<Content className="page-main">{children}</Content>
 
-				<Sider width={260} className="sidebar-right">
-					<SidebarAds />
-				</Sider>
+				{!isAuthPage && (
+					<Sider width={260} className="sidebar-right">
+						<SidebarAds />
+					</Sider>
+				)}
 			</Layout>
 
 			<AppFooter />

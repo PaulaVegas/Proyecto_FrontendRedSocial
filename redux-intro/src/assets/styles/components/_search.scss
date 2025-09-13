@@ -42,7 +42,7 @@
 
 			p {
 				margin-bottom: 0.8rem;
-				color: #555;
+				color: var(--grey);
 			}
 
 			.post-meta {
@@ -64,8 +64,8 @@
 		button {
 			padding: 0.5rem 1rem;
 			border: none;
-			background-color: var(--primary-dark);
-			color: #fff;
+			background-color: var(--grey);
+			color: var(--calico-white);
 			border-radius: 5px;
 			cursor: pointer;
 
@@ -80,6 +80,6 @@
 	.no-posts {
 		text-align: center;
 		font-size: 1.2rem;
-		color: #555;
+		color: var(--grey);
 	}
 }

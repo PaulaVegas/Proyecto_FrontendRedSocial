@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import snacks from "../assets/images/snacks.jpg";
-import sleeping_cat from "../assets/images/sleeping.jpg";
-import playing from "../assets/images/playing.jpg";
+import snacks from "../../assets/images/snacks.jpg";
+import sleeping_cat from "../../assets/images/sleeping.jpg";
+import playing from "../../assets/images/playing.jpg";
 
 const adsData = [
 	{
@@ -10,7 +10,6 @@ const adsData = [
 		link: "#",
 	},
 	{
-
 		text: "New sleeping spots for your cat!",
 		image: sleeping_cat,
 		link: "#",

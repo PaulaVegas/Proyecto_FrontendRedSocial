@@ -5,7 +5,7 @@ import { Input, Button, List, Avatar } from "antd";
 import axios from "axios";
 import { getById } from "../../redux/posts/postsSlice";
 import LikeButton from "./LikeButton";
-import EditModal from "../EditModal";
+import EditModal from "../Utils/EditModal";
 
 const { TextArea } = Input;
 

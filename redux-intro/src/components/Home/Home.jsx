@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PostsContainer from "../Post/PostContainer";
 import NewPostIcon from "../../assets/logos/newPawst.svg";
 import NewPost from "../Post/NewPost";
@@ -6,27 +7,19 @@ import "./home.scss";
 
 const Home = () => {
 	const [showNewPost, setShowNewPost] = useState(false);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			navigate("/login");
+		}
+	}, [navigate]);
 
 	return (
 		<div className="page-layout">
 			<div className="home-content-wrapper">
 				<div className="home-page">
-					<header className="home-header">
-						<h1>🐾 Welcome to MeowSpace 🐾</h1>
-						<p className="home-subtitle">
-							The first social network made by cat lovers for cat lovers! Share
-							your favorite moments with your feline friends and connect with
-							other cat enthusiasts around the world.
-						</p>
-					</header>
-
-					<main className="posts-center">
-						<PostsContainer
-							showNewPost={showNewPost}
-							setShowNewPost={setShowNewPost}
-						/>
-					</main>
-
 					<div
 						className="new-post-button-wrapper"
 						onClick={() => setShowNewPost((prev) => !prev)}
@@ -36,11 +29,12 @@ const Home = () => {
 						<span className="new-post-text">Pawst</span>
 					</div>
 
-					{showNewPost && (
-						<div className="new-post-form-wrapper">
-							<NewPost onSuccess={() => setShowNewPost(false)} />
-						</div>
-					)}
+					<main className="posts-center">
+						<PostsContainer
+							showNewPost={showNewPost}
+							setShowNewPost={setShowNewPost}
+						/>
+					</main>
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import { fetchUserInfo } from "../../redux/auth/authSlice";
 import { Card, Avatar, Button, Row, Col, List } from "antd";
 import defaultAvatar from "../../assets/logos/default-avatar.jpg";
 import PostCard from "../Post/PostCard";
-import EditModal from "../EditModal";
+import EditModal from "../Utils/EditModal";
 import { deletePost } from "../../redux/posts/postsSlice";
 
 const Profile = () => {
@@ -86,12 +86,6 @@ const Profile = () => {
 							type="primary"
 							block
 							onClick={() => navigate("/edit-profile")}
-							style={{
-								backgroundColor: "var(--accent)",
-								borderColor: "var(--accent)",
-								fontWeight: 600,
-								borderRadius: "12px",
-							}}
 						>
 							Edit Profile
 						</Button>
@@ -103,32 +97,35 @@ const Profile = () => {
 						</p>
 					</div>
 
-					<Row gutter={16} style={{ marginTop: 20 }}>
-						<Col span={12}>
-							<Card
-								title={`Followers (${user.followers?.length || 0})`}
-								size="small"
-							>
-								<List
-									dataSource={user.followers || []}
-									renderItem={renderUserItem}
+					<div className="follower-following-stats">
+						<Row gutter={16} style={{ marginTop: 20 }}>
+							<Col span={12}>
+								<Card
+									title={`Followers (${user.followers?.length || 0})`}
 									size="small"
-								/>
-							</Card>
-						</Col>
-						<Col span={12}>
-							<Card
-								title={`Following (${user.following?.length || 0})`}
-								size="small"
-							>
-								<List
-									dataSource={user.following || []}
-									renderItem={renderUserItem}
+								>
+									<List
+										dataSource={user.followers || []}
+										renderItem={renderUserItem}
+										size="small"
+									/>
+								</Card>
+							</Col>
+							<Col span={12}>
+								<Card
+									title={`Following (${user.following?.length || 0})`}
 									size="small"
-								/>
-							</Card>
-						</Col>
-					</Row>
+								>
+									<List
+										dataSource={user.following || []}
+										renderItem={renderUserItem}
+										size="small"
+									/>
+								</Card>
+							</Col>
+						</Row>
+					</div>
+
 					<div className="profile-posts">
 						<h3>My Posts</h3>
 						{user.posts && user.posts.length > 0 ? (

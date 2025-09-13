@@ -11,7 +11,13 @@ const AppFooter = () => {
 				<div className="footer-links">
 					<Link to="/about">About us</Link>
 					<Link to="/cookies">Cookie Policy</Link>
-					<Link to="/contact">Contact</Link>
+					<a
+						href="https://www.linkedin.com/in/paulamartinezvegas/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Contact
+					</a>
 				</div>
 				<div className="footer-copy">
 					© {new Date().getFullYear()} MeowSpace 🐾

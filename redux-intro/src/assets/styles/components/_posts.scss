@@ -8,8 +8,8 @@
 	align-items: center;
 
 	.post-card {
-		background: var(--primary-light);
-		color: var(--text);
+		background: var(--calico-cream);
+		color: var(--calico-black);
 		border-radius: 12px;
 		padding: 0.75rem;
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -32,11 +32,11 @@
 				font-size: 1rem;
 				line-height: 1.2;
 				margin: 0;
-				color: var(--accent);
+				color: var(--accent-blue);
 			}
 
 			&:hover h3 {
-				color: var(--primary-dark);
+				color: var(--calico-black);
 			}
 		}
 
@@ -52,14 +52,14 @@
 		.post-content {
 			font-size: 0.9rem;
 			line-height: 1.4;
-			color: var(--text);
+			color: var(--calico-black);
 			margin-bottom: 0.5rem;
 		}
 
 		.post-author {
 			font-size: 0.8rem;
 			font-style: italic;
-			color: var(--text);
+			color: var(--accent-blue);
 			margin-top: auto;
 			text-align: right;
 		}
@@ -67,7 +67,49 @@
 		.comments-count {
 			font-size: 0.85rem;
 			margin-top: 0.4rem;
-			color: var(--text);
+			color: var(--grey);
 		}
+	}
+}
+
+.pagination-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	margin-top: 1.5rem;
+
+	button {
+		background: var(--calico-black);
+		color: var(--calico-white);
+		border: none;
+		padding: 0.5rem 1.2rem;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: 600;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: var(--calico-orange);
+			transform: translateY(-2px);
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+		}
+
+		&:disabled {
+			background: var(--grey);
+			cursor: not-allowed;
+			transform: none;
+			box-shadow: none;
+		}
+	}
+
+	span {
+		font-weight: 600;
+		color: var(--calico-black);
+		padding: 0.4rem 0.8rem;
+		background: var(--calico-cream);
+		border-radius: 8px;
+		min-width: 70px;
+		text-align: center;
 	}
 }
