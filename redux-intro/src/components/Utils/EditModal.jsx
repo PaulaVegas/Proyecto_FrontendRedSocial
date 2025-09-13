@@ -61,6 +61,8 @@ const EditModal = ({ visible, setVisible, post, onSaved }) => {
 			onCancel={() => setVisible(false)}
 			okText="Save"
 			cancelText="Cancel"
+			className="custom-edit-modal"
+			centered
 		>
 			<Form form={form} layout="vertical" name="edit_post_form">
 				<Form.Item name="title" label="Title" rules={[{ required: true }]}>
@@ -81,6 +83,7 @@ const EditModal = ({ visible, setVisible, post, onSaved }) => {
 					</Upload>
 					{preview && (
 						<img
+							className="preview-image"
 							src={preview}
 							alt="Preview"
 							style={{ maxWidth: "200px", marginTop: "1rem" }}

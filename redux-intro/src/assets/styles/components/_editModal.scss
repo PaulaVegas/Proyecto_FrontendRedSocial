@@ -1,0 +1,65 @@
+.custom-edit-modal .ant-modal-content {
+	border-radius: 16px !important;
+	background: var(--calico-cream) !important;
+	padding: 2rem !important;
+}
+
+.custom-edit-modal .ant-modal-header {
+	background: var(--accent-green) !important;
+	color: var(--calico-white) !important;
+	border-bottom: none !important;
+	border-radius: 16px 16px 0 0 !important;
+
+	.ant-modal-title {
+		font-weight: 700 !important;
+		font-size: 1.5rem !important;
+		text-align: center !important;
+		width: 100% !important;
+		display: block !important;
+	}
+}
+
+.custom-edit-modal .ant-modal-body {
+	padding: 1.5rem 0 !important;
+}
+
+.custom-edit-modal .ant-form-item-label > label {
+	font-weight: 600 !important;
+	color: var(--accent-blue) !important;
+}
+
+.custom-edit-modal .ant-input,
+.custom-edit-modal .ant-input-textarea {
+	border-radius: 8px !important;
+	border: 1px solid var(--grey) !important;
+	padding: 0.5rem !important;
+}
+
+.custom-edit-modal .ant-btn {
+	border-radius: 8px !important;
+	font-weight: 600 !important;
+	transition: all 0.2s ease !important;
+
+	&:hover {
+		opacity: 0.9 !important;
+	}
+}
+
+.custom-edit-modal .ant-btn-primary {
+	background-color: var(--accent-blue) !important;
+	color: var(--calico-white) !important;
+	border: none !important;
+}
+
+.custom-edit-modal .ant-btn-default {
+	background-color: var(--detail-pink) !important;
+	color: var(--calico-black) !important;
+	border: none !important;
+}
+
+.custom-edit-modal .preview-image {
+	max-width: 200px !important;
+	margin-top: 1rem !important;
+	border-radius: 12px !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}

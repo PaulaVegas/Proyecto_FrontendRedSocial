@@ -69,6 +69,40 @@
 			margin-top: 0.4rem;
 			color: var(--grey);
 		}
+		.post-actions {
+			display: flex;
+			justify-content: flex-start;
+			gap: 0.5rem;
+			margin-top: 0.5rem;
+
+			button {
+				padding: 0.3rem 0.8rem;
+				border-radius: 8px;
+				border: none;
+				font-weight: 600;
+				cursor: pointer;
+				transition: background 0.2s, color 0.2s;
+
+				&:first-child {
+					background-color: var(--accent-blue);
+					color: var(--calico-white);
+
+					&:hover {
+						background-color: var(--calico-black);
+					}
+				}
+
+				&:last-child {
+					background-color: var(--detail-pink);
+					color: var(--calico-black);
+
+					&:hover {
+						background-color: #ff6b6b;
+						color: #fff;
+					}
+				}
+			}
+		}
 	}
 }
 

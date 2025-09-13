@@ -95,19 +95,56 @@
 	}
 }
 
-.follower-following-stats .ant-card {
+.follower-following-stats {
+	width: 100%;
 	margin-bottom: 1rem;
-	background-color: var(--detail-pink) !important;
-	margin-bottom: 1rem;
+	display: flex;
+	gap: 1rem;
 
-	.stat {
-		text-align: center;
-		color: var(--calico-black) !important;
+	.ant-card {
+		flex: 1;
+		background-color: var(--detail-pink) !important;
+		align-items: center;
 
-		.number {
-			font-weight: 700;
-			font-size: 1.2rem;
-			color: var(--accent-green) !important;
+		.stat {
+			text-align: center;
+			color: var(--calico-black) !important;
+
+			.number {
+				font-weight: 700;
+				font-size: 1.2rem;
+				color: var(--accent-green) !important;
+			}
+		}
+	}
+
+	.card-followers {
+		background-color: var(--detail-pink);
+		margin-bottom: 1rem;
+
+		.ant-card-head {
+			background-color: var(--detail-pink);
+			color: var(--calico-white);
+		}
+
+		.ant-card-body {
+			background-color: var(--calico-white);
+			color: var(--calico-black);
+		}
+	}
+
+	.card-following {
+		background-color: var(--calico-white);
+		color: var(--calico-black);
+
+		.ant-card-head {
+			background-color: var(--detail-pink);
+			color: var(--calico-white);
+		}
+
+		.ant-card-body {
+			background-color: var(--calico-white);
+			color: var(--calico-black);
 		}
 	}
 }
@@ -131,9 +168,5 @@
 			flex-direction: column;
 			gap: 0.5rem;
 		}
-	}
-
-	.auth-card {
-		padding: 1.5rem;
 	}
 }

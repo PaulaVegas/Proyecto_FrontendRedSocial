@@ -99,10 +99,12 @@ const Profile = () => {
 
 					<div className="follower-following-stats">
 						<Row gutter={16} style={{ marginTop: 20 }}>
-							<Col span={12}>
+							<Col xs={24} sm={12}>
 								<Card
 									title={`Followers (${user.followers?.length || 0})`}
 									size="small"
+									style={{ backgroundColor: "#ffd8b5" }}
+									className="card-followers"
 								>
 									<List
 										dataSource={user.followers || []}
@@ -111,10 +113,11 @@ const Profile = () => {
 									/>
 								</Card>
 							</Col>
-							<Col span={12}>
+							<Col xs={24} sm={12}>
 								<Card
 									title={`Following (${user.following?.length || 0})`}
 									size="small"
+									className="card-following"
 								>
 									<List
 										dataSource={user.following || []}
