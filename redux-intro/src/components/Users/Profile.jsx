@@ -7,6 +7,7 @@ import defaultAvatar from "../../assets/logos/default-avatar.jpg";
 import PostCard from "../Post/PostCard";
 import EditModal from "../Utils/EditModal";
 import { deletePost } from "../../redux/posts/postsSlice";
+import { UserOutlined } from "@ant-design/icons";
 
 const Profile = () => {
 	const navigate = useNavigate();
@@ -52,9 +53,8 @@ const Profile = () => {
 			<List.Item.Meta
 				avatar={
 					<Avatar
-						src={
-							u.profileImage ? `${API_URL}/${u.profileImage}` : defaultAvatar
-						}
+						src={u.profileImage}
+						icon={!u.profileImage && <UserOutlined />}
 					/>
 				}
 				title={u.username}
@@ -68,11 +68,8 @@ const Profile = () => {
 				<div className="profile-avatar">
 					<Avatar
 						size={120}
-						src={
-							user.profileImage
-								? `${API_URL}/${user.profileImage}`
-								: defaultAvatar
-						}
+						src={user.profileImage || undefined}
+						icon={!user.profileImage && <UserOutlined />}
 						alt={user.username}
 					/>
 				</div>

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Card, Form, Input, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Card, Form, Input, Button, Upload, Avatar } from "antd";
+import { UploadOutlined, UserOutlined } from "@ant-design/icons";
 
 const EditProfile = () => {
 	const { user } = useSelector((state) => state.auth);
@@ -12,6 +12,7 @@ const EditProfile = () => {
 	const navigate = useNavigate();
 	const userId = user._id || user.id;
 	const API_URL = import.meta.env.VITE_API_URL;
+
 	const [formData, setFormData] = useState({
 		username: user?.username || "",
 		email: user?.email || "",
@@ -20,12 +21,18 @@ const EditProfile = () => {
 		profileImage: null,
 	});
 
+	const [previewImage, setPreviewImage] = useState("");
+
 	useEffect(() => {
-		setFormData((prev) => ({
-			...prev,
-			username: user?.username || "",
-			email: user?.email || "",
-		}));
+		if (user) {
+			setFormData((prev) => ({
+				...prev,
+				username: user?.username || "",
+				email: user?.email || "",
+				profileImage: null,
+			}));
+			setPreviewImage(user.profileImage || "");
+		}
 	}, [user]);
 
 	const handleChange = (e) => {
@@ -34,6 +41,7 @@ const EditProfile = () => {
 
 	const handleUpload = ({ file }) => {
 		setFormData({ ...formData, profileImage: file });
+		setPreviewImage(URL.createObjectURL(file));
 	};
 
 	const handleSubmit = async () => {
@@ -74,7 +82,7 @@ const EditProfile = () => {
 	return (
 		<div className="profile-container">
 			<Card className="profile-card">
-				<h2 className="profile-title">Edit Pawfile 🐾</h2>
+				<h2 className="profile-title">Edit Pawfile</h2>
 				<Form layout="vertical" onFinish={handleSubmit}>
 					<Form.Item label="Username">
 						<Input
@@ -118,8 +126,8 @@ const EditProfile = () => {
 						htmlType="submit"
 						block
 						style={{
-							backgroundColor: "var(--accent)",
-							borderColor: "var(--accent)",
+							backgroundColor: "var(--detail-pink)",
+							borderColor: "var(--calico-black)",
 						}}
 					>
 						Save Changes

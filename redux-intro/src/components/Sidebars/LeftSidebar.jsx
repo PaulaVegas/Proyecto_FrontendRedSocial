@@ -40,8 +40,11 @@ const SidebarLeft = () => {
 				{suggestions.map((user) => (
 					<li key={user._id} className="sidebar-user">
 						<div className="sidebar-user-info">
-							{user.avatar ? (
-								<img src={`${API_URL}/${user.avatar}`} alt={user.username} />
+							{user.profileImage ? (
+								<img
+									src={`${API_URL}/${user.profileImage}`}
+									alt={user.username}
+								/>
 							) : (
 								<div className="avatar-placeholder" />
 							)}
