@@ -12,7 +12,7 @@ const AboutUs = () => {
 				This project was proudly (and occasionally desperately) built as part of
 				a <strong>Fullstack Bootcamp</strong>. While the code works, you might
 				notice that the design is… let’s say <em>unique</em>. Or, as one of my
-				classmates so locingly put,{" "}
+				classmates so lovingly put,{" "}
 				<em>
 					<strong>vintage</strong>.
 				</em>{" "}
