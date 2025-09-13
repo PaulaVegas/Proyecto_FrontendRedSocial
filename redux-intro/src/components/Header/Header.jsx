@@ -92,7 +92,7 @@ const AppHeader = () => {
 				</h1>
 			</div>
 
-			{!isMobile && (
+			{user && !isMobile && (
 				<div className="header-center">
 					<Input
 						placeholder="Search post"

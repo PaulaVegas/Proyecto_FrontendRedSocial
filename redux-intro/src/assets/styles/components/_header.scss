@@ -8,8 +8,8 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1.5rem;
-	background: #ffd8b5;
-	border-bottom: 2px solid #ff9e80;
+	background: var(--calico-cream);
+	border-bottom: 2px solid var(--calico-orange);
 	z-index: 1000;
 
 	.icon {
@@ -38,25 +38,29 @@
 		h1 {
 			font-size: 1.2rem;
 			font-weight: 700;
-			color: #5c4033;
+			color: var(--calico-black);
 
 			span {
-				color: #ff9e80;
+				color: var(--calico-orange);
 			}
 		}
 	}
 
 	.header-center {
 		flex: 1;
+		display: flex;
+		justify-content: center;
 		margin: 0 1rem;
 
 		.ant-input {
-			border-radius: 20px;
+			width: 100%;
+			max-width: 500px;
+			height: 40px;
+			border-radius: 24px;
+			padding: 0 1.2rem;
+			font-size: 1rem;
 			border: 1px solid #ff9e80;
-			padding: 0.3rem 1rem;
-			font-size: 0.9rem;
-			max-width: 400px;
-			height: 32px;
+
 			&:focus {
 				border-color: #ffa45b;
 				box-shadow: 0 0 0 2px rgba(255, 158, 128, 0.4);
@@ -75,27 +79,35 @@
 
 			.ant-menu-item {
 				font-weight: 600;
-				color: #5c4033;
+				color: var(--calico-black);
+				position: relative;
+
+				&::after {
+					display: none;
+				}
 
 				&:hover {
-					color: #ff9e80;
-					background: #ffa45b;
+					color: var(--calico-cream);
+					background: var(--detail-pink);
 					border-radius: 8px;
 				}
 
 				&.ant-menu-item-selected {
-					color: var(--text);
-					background: #ffa45b;
+					color: var(--calico-black);
+					background: var(--detail-pink);
 					border-radius: 8px;
+				}
+				&.ant-menu-item-selected::after {
+					display: none;
 				}
 			}
 		}
 
 		.ant-btn {
-			color: #5c4033;
+			color: var(--calico-black);
 
 			&:hover {
-				color: #ff9e80;
+				color: var(--calico-orange);
 			}
 		}
 	}

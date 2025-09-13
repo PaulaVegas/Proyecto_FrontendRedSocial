@@ -11,7 +11,7 @@
 	padding: 2rem;
 	border-radius: 16px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	background: #fff;
+	background: var(--calico-white);
 
 	.profile-avatar {
 		display: flex;
@@ -24,7 +24,7 @@
 			height: 120px;
 			border-radius: 50%;
 			object-fit: cover;
-			border: 3px solid var(--accent);
+			border: 3px solid var(--accent-green);
 		}
 	}
 
@@ -34,12 +34,12 @@
 
 		h2 {
 			font-size: 1.8rem;
-			color: var(--accent);
+			color: var(--accent-green);
 			margin-bottom: 0.5rem;
 		}
 
 		p {
-			color: var(--text);
+			color: var(--calico-black);
 			margin: 0.25rem 0;
 		}
 	}
@@ -53,14 +53,14 @@
 		.ant-btn {
 			border-radius: 12px;
 			font-weight: 600;
-			background-color: var(--accent);
-			border-color: var(--accent);
-			color: #fff;
+			background-color: var(--detail-pink);
+			border-color: var(--accent-blue);
+			color: var(--calico-black);
 
 			&:hover,
 			&:focus {
-				background-color: var(--primary-dark);
-				border-color: var(--primary-dark);
+				background-color: var(--calico-black);
+				border-color: var(--grey);
 			}
 		}
 	}
@@ -73,13 +73,41 @@
 
 		.stat {
 			text-align: center;
-			color: var(--text);
+			color: var(--calico-black);
 
 			.number {
 				font-weight: 700;
 				font-size: 1.2rem;
-				color: var(--accent);
+				color: var(--accent-green);
 			}
+		}
+	}
+}
+
+.profile-posts {
+	margin-top: 2rem;
+
+	h3 {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		color: var(--accent-green);
+		text-align: center;
+	}
+}
+
+.follower-following-stats .ant-card {
+	margin-bottom: 1rem;
+	background-color: var(--detail-pink) !important;
+	margin-bottom: 1rem;
+
+	.stat {
+		text-align: center;
+		color: var(--calico-black) !important;
+
+		.number {
+			font-weight: 700;
+			font-size: 1.2rem;
+			color: var(--accent-green) !important;
 		}
 	}
 }

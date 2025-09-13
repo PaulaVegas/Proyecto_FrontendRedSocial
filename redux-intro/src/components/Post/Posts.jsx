@@ -1,6 +1,6 @@
 import PostCard from "./PostCard";
 import { useState } from "react";
-import EditModal from "../EditModal";
+import EditModal from "../Utils/EditModal";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../redux/posts/postsSlice";
 

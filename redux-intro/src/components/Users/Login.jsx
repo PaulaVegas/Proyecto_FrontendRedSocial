@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../../redux/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { notification, Form, Input, Button, Card } from "antd";
 
 const Login = () => {
@@ -49,6 +49,12 @@ const Login = () => {
 						Login
 					</Button>
 				</Form>
+				<p style={{ marginTop: "1rem", textAlign: "center" }}>
+					New to MeowSpace?{" "}
+					<Link to="/register">
+						<b>Sign Up</b>
+					</Link>
+				</p>
 			</Card>
 		</div>
 	);

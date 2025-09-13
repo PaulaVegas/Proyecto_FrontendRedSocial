@@ -7,7 +7,7 @@
 	.post-detail-card {
 		max-width: 640px;
 		width: 100%;
-		background: linear-gradient(145deg, #ffd8b5, #ffe6cc);
+		background: linear-gradient(145deg, var(--calico-cream), var(--grey));
 		border-radius: 16px;
 		padding: 1.25rem 1rem;
 		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@
 		.post-title {
 			font-size: 1.4rem;
 			font-weight: 700;
-			color: var(--accent);
+			color: var(--calico-black);
 			margin-bottom: 0.8rem;
 			text-align: center;
 		}
@@ -29,12 +29,12 @@
 		.post-content {
 			font-size: 1rem;
 			line-height: 1.6;
-			color: var(--text);
+			color: var(--calico-black);
 			margin-bottom: 1rem;
 		}
 		.post-date {
 			font-size: 0.85rem;
-			color: var(--text);
+			color: var(--calico-black);
 			margin-bottom: 0.5rem;
 			text-align: right;
 		}
@@ -52,7 +52,7 @@
 		.post-author {
 			font-size: 0.9rem;
 			font-style: italic;
-			color: var(--accent);
+			color: var(--accent-blue);
 			text-align: right;
 		}
 	}
