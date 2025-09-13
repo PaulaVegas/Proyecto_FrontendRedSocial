@@ -41,10 +41,7 @@ const SidebarLeft = () => {
 					<li key={user._id} className="sidebar-user">
 						<div className="sidebar-user-info">
 							{user.profileImage ? (
-								<img
-									src={`${API_URL}/${user.profileImage}`}
-									alt={user.username}
-								/>
+								<img src={user.profileImage} alt={user.username} />
 							) : (
 								<div className="avatar-placeholder" />
 							)}
