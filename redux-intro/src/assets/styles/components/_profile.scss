@@ -97,54 +97,38 @@
 
 .follower-following-stats {
 	width: 100%;
-	margin-bottom: 1rem;
 	display: flex;
 	gap: 1rem;
+	margin-bottom: 1rem;
 
-	.ant-card {
+	.ant-col {
 		flex: 1;
-		background-color: var(--detail-pink) !important;
-		align-items: center;
 
-		.stat {
-			text-align: center;
-			color: var(--calico-black) !important;
+		.ant-card {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
 
-			.number {
-				font-weight: 700;
-				font-size: 1.2rem;
-				color: var(--accent-green) !important;
+			.ant-card-head {
+				background-color: var(--detail-pink);
+				color: var(--calico-white);
+				font-weight: 600;
+				text-align: center;
+			}
+
+			.ant-card-body {
+				background-color: var(--calico-white);
+				color: var(--calico-black);
+				flex: 1;
 			}
 		}
 	}
 
-	.card-followers {
-		background-color: var(--detail-pink);
-		margin-bottom: 1rem;
+	@media (max-width: 640px) {
+		flex-direction: column;
 
-		.ant-card-head {
-			background-color: var(--detail-pink);
-			color: var(--calico-white);
-		}
-
-		.ant-card-body {
-			background-color: var(--calico-white);
-			color: var(--calico-black);
-		}
-	}
-
-	.card-following {
-		background-color: var(--calico-white);
-		color: var(--calico-black);
-
-		.ant-card-head {
-			background-color: var(--detail-pink);
-			color: var(--calico-white);
-		}
-
-		.ant-card-body {
-			background-color: var(--calico-white);
-			color: var(--calico-black);
+		.ant-col {
+			width: 100%;
 		}
 	}
 }
