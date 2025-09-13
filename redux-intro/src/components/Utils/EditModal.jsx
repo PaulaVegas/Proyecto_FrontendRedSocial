@@ -1,7 +1,7 @@
 import { Button, Modal, Form, Input, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { update } from "../redux/posts/postsSlice";
+import { update } from "../../redux/posts/postsSlice";
 import { UploadOutlined } from "@ant-design/icons";
 
 const EditModal = ({ visible, setVisible, post, onSaved }) => {

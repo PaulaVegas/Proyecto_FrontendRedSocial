@@ -8,7 +8,8 @@ import EditProfile from "./components/Users/EditProfile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout";
 import PrivateZone from "./guards/PrivateZone";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/Utils/NotFound";
+import AboutUs from "./components/Utils/AboutUs";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						<Route path="/edit-profile" element={<EditProfile />} />
 						<Route path="/posts/:id" element={<PostDetail />} />
 						<Route path="/posts/title/:title" element={<Search />} />
+						<Route path="/about" element={<AboutUs />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</AppLayout>
