@@ -97,38 +97,28 @@
 
 .follower-following-stats {
 	width: 100%;
-	display: flex;
-	gap: 1rem;
 	margin-bottom: 1rem;
+
+	.ant-row {
+		display: flex;
+		gap: 1rem;
+	}
 
 	.ant-col {
 		flex: 1;
-
-		.ant-card {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-
-			.ant-card-head {
-				background-color: var(--detail-pink);
-				color: var(--calico-white);
-				font-weight: 600;
-				text-align: center;
-			}
-
-			.ant-card-body {
-				background-color: var(--calico-white);
-				color: var(--calico-black);
-				flex: 1;
-			}
-		}
 	}
 
-	@media (max-width: 640px) {
-		flex-direction: column;
+	.card-followers,
+	.card-following {
+		.ant-card-head {
+			background-color: var(--detail-pink);
+			color: var(--calico-white);
+			text-align: center;
+		}
 
-		.ant-col {
-			width: 100%;
+		.ant-card-body {
+			background-color: var(--calico-white);
+			color: var(--calico-black);
 		}
 	}
 }
@@ -151,6 +141,16 @@
 		.profile-actions {
 			flex-direction: column;
 			gap: 0.5rem;
+		}
+	}
+	.follower-following-stats {
+		.ant-row {
+			flex-direction: column;
+		}
+
+		.ant-col {
+			width: 100%;
+			margin-bottom: 1rem;
 		}
 	}
 }

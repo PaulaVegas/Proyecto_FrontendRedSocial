@@ -98,7 +98,7 @@ const Profile = () => {
 					</div>
 
 					<div className="follower-following-stats">
-						<Row gutter={16} style={{ marginTop: 20 }}>
+						<Row gutter={[16, 16]} style={{ marginTop: 20 }}>
 							<Col xs={24} sm={12}>
 								<Card
 									title={`Followers (${user.followers?.length || 0})`}
