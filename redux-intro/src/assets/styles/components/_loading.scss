@@ -1,0 +1,59 @@
+@use "../mixins" as m;
+
+.loading-spinner {
+	@include m.flex-center;
+	@include m.flex-column;
+	padding: var(--spacing-xl);
+	
+	&.fullscreen {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255, 255, 255, 0.9);
+		z-index: var(--z-modal);
+		backdrop-filter: blur(4px);
+	}
+	
+	&.small {
+		padding: var(--spacing-sm);
+		
+		.loading-text {
+			font-size: var(--font-size-xs);
+			margin-top: var(--spacing-sm);
+		}
+	}
+	
+	&.large {
+		padding: var(--spacing-2xl);
+		
+		.loading-text {
+			font-size: var(--font-size-lg);
+			margin-top: var(--spacing-lg);
+		}
+	}
+	
+	.loading-text {
+		margin-top: var(--spacing-md);
+		color: var(--neutral);
+		font-size: var(--font-size-sm);
+		text-align: center;
+		font-weight: 500;
+	}
+}
+
+// Animación personalizada para el spinner
+.ant-spin-dot {
+	.ant-spin-dot-item {
+		background-color: var(--primary);
+	}
+}
+
+.ant-spin {
+	.ant-spin-dot {
+		.ant-spin-dot-item {
+			background-color: var(--primary);
+		}
+	}
+}

@@ -1,19 +1,120 @@
 @use "./variables" as v;
 
+// === RESPONSIVE BREAKPOINTS ===
+@mixin mobile {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: 768px) and (max-width: 1023px) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin large-desktop {
+	@media (min-width: 1440px) {
+		@content;
+	}
+}
+
+// === BREAKPOINTS LEGACY (mantener compatibilidad) ===
 @mixin respond($breakpoint) {
 	@if $breakpoint == sm {
-		@media (min-width: v.$breakpoint-sm) {
+		@include mobile {
 			@content;
 		}
 	}
 	@if $breakpoint == md {
-		@media (min-width: v.$breakpoint-md) {
+		@include tablet {
 			@content;
 		}
 	}
 	@if $breakpoint == lg {
-		@media (min-width: v.$breakpoint-lg) {
+		@include desktop {
 			@content;
+		}
+	}
+}
+
+// === UTILITY MIXINS ===
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@mixin flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin card-style {
+	background: var(--bg);
+	border-radius: var(--border-radius-md);
+	box-shadow: var(--shadow-md);
+	padding: var(--spacing-md);
+}
+
+@mixin button-style {
+	border: none;
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-sm) var(--spacing-md);
+	font-weight: 600;
+	cursor: pointer;
+	transition: all var(--transition-normal);
+	
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+	
+	&:active {
+		transform: translateY(0);
+	}
+}
+
+@mixin input-style {
+	border: 1px solid var(--accent);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-sm) var(--spacing-md);
+	font-family: var(--font-family);
+	transition: all var(--transition-normal);
+	
+	&:focus {
+		outline: none;
+		border-color: var(--primary);
+		box-shadow: 0 0 0 2px rgba(224, 122, 95, 0.2);
+	}
+}
+
+@mixin text-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin aspect-ratio($width, $height) {
+	aspect-ratio: #{$width} / #{$height};
+	
+	@supports not (aspect-ratio: #{$width} / #{$height}) {
+		&::before {
+			content: '';
+			display: block;
+			padding-top: percentage($height / $width);
 		}
 	}
 }

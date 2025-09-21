@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import { handleApiError } from "../../utils/notifications";
 
 const safeParse = (item) => {
 	try {
@@ -74,10 +75,8 @@ export const register = createAsyncThunk(
 		try {
 			return await authService.register(user);
 		} catch (error) {
-			const message = error.response.data.errors.map(
-				(error) => `${error.msg} | `
-			);
-			return thunkAPI.rejectWithValue(message);
+			const errorMessage = handleApiError(error, "Error al registrarse");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -86,16 +85,21 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 	try {
 		return await authService.login(user);
 	} catch (error) {
-		const message = error.response.data.error;
-		return thunkAPI.rejectWithValue(message);
+		const errorMessage = handleApiError(error, "Error al iniciar sesión");
+		return thunkAPI.rejectWithValue(errorMessage);
 	}
 });
 
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 	try {
 		return await authService.logout();
 	} catch (error) {
-		console.error(error);
+		handleApiError(error, "Error al cerrar sesión");
+		// Limpiar localStorage incluso si hay error
+		localStorage.removeItem("token");
+		localStorage.removeItem("user");
+		localStorage.removeItem("userId");
+		return thunkAPI.rejectWithValue("Error al cerrar sesión");
 	}
 });
 
@@ -105,7 +109,8 @@ export const fetchUserInfo = createAsyncThunk(
 		try {
 			return await authService.getUserInfo();
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response.data.message);
+			const errorMessage = handleApiError(error, "Error al obtener información del usuario");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );

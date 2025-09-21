@@ -29,13 +29,78 @@ a {
 }
 
 :root {
-	--grey: #b2a6a1;
-	--accent-green: #a8c686;
-	--accent-blue: #3d5a80;
-	--detail-pink: #f4978e;
-	--calico-white: #fafaf5;
-	--calico-cream: #f5e6d3;
-	--calico-orange: #e07a5f;
-	--calico-black: #333333;
-	--calico-yellow: #f2c94c;
+	// === COLORES PRINCIPALES ===
+	--primary: #e07a5f;           // Calico Orange - Color principal
+	--secondary: #f5e6d3;         // Calico Cream - Color secundario
+	--accent: #f2c94c;            // Calico Yellow - Acento
+	--text: #333333;              // Calico Black - Texto principal
+	--bg: #fafaf5;                // Calico White - Fondo principal
+	
+	// === COLORES DE APOYO ===
+	--success: #a8c686;           // Accent Green - Éxito
+	--info: #3d5a80;              // Accent Blue - Información
+	--warning: #f4978e;           // Detail Pink - Advertencia
+	--neutral: #b2a6a1;           // Grey - Neutro
+	
+	// === COLORES DE ESTADO ===
+	--error: #e74c3c;             // Rojo para errores
+	--success-light: #d4edda;     // Verde claro para éxito
+	--warning-light: #fff3cd;     // Amarillo claro para advertencia
+	--error-light: #f8d7da;       // Rojo claro para errores
+	
+	// === ESPACIADO ===
+	--spacing-xs: 0.25rem;        // 4px
+	--spacing-sm: 0.5rem;         // 8px
+	--spacing-md: 1rem;           // 16px
+	--spacing-lg: 1.5rem;         // 24px
+	--spacing-xl: 2rem;           // 32px
+	--spacing-2xl: 3rem;          // 48px
+	
+	// === BORDES ===
+	--border-radius-sm: 8px;
+	--border-radius-md: 12px;
+	--border-radius-lg: 16px;
+	--border-radius-xl: 20px;
+	--border-radius-full: 50%;
+	
+	// === SOMBRAS ===
+	--shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+	--shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.1);
+	
+	// === TRANSICIONES ===
+	--transition-fast: 0.15s ease;
+	--transition-normal: 0.2s ease;
+	--transition-slow: 0.3s ease;
+	
+	// === TIPOGRAFÍA ===
+	--font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--font-size-xs: 0.75rem;      // 12px
+	--font-size-sm: 0.875rem;     // 14px
+	--font-size-base: 1rem;       // 16px
+	--font-size-lg: 1.125rem;     // 18px
+	--font-size-xl: 1.25rem;      // 20px
+	--font-size-2xl: 1.5rem;      // 24px
+	--font-size-3xl: 1.875rem;    // 30px
+	
+	// === Z-INDEX ===
+	--z-dropdown: 1000;
+	--z-sticky: 1020;
+	--z-fixed: 1030;
+	--z-modal-backdrop: 1040;
+	--z-modal: 1050;
+	--z-popover: 1060;
+	--z-tooltip: 1070;
+	
+	// === COMPATIBILIDAD (mantener variables antiguas) ===
+	--grey: var(--neutral);
+	--accent-green: var(--success);
+	--accent-blue: var(--info);
+	--detail-pink: var(--warning);
+	--calico-white: var(--bg);
+	--calico-cream: var(--secondary);
+	--calico-orange: var(--primary);
+	--calico-black: var(--text);
+	--calico-yellow: var(--accent);
 }

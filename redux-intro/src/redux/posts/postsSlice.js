@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import postsService from "./postsService";
+import { handleApiError } from "../../utils/notifications";
 
 const initialState = {
 	posts: [],
@@ -18,9 +19,8 @@ export const getAll = createAsyncThunk(
 		try {
 			return await postsService.getAll(page, limit);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(
-				error.response?.data?.message || error.message
-			);
+			const errorMessage = handleApiError(error, "Error al cargar los posts");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -31,9 +31,8 @@ export const getById = createAsyncThunk(
 		try {
 			return await postsService.getById(id);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(
-				error.response?.data?.message || error.message
-			);
+			const errorMessage = handleApiError(error, "Error al cargar el post");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -44,9 +43,8 @@ export const getPostByTitle = createAsyncThunk(
 		try {
 			return await postsService.getPostByTitle(title, page, limit);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(
-				error.response?.data?.message || error.message
-			);
+			const errorMessage = handleApiError(error, "Error al buscar posts");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -57,9 +55,8 @@ export const update = createAsyncThunk(
 		try {
 			return await postsService.update(id, postData);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(
-				error.response?.data?.message || error.message
-			);
+			const errorMessage = handleApiError(error, "Error al actualizar el post");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -70,9 +67,8 @@ export const deletePost = createAsyncThunk(
 		try {
 			return await postsService.deletePost(id);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(
-				error.response?.data?.message || error.message
-			);
+			const errorMessage = handleApiError(error, "Error al eliminar el post");
+			return thunkAPI.rejectWithValue(errorMessage);
 		}
 	}
 );

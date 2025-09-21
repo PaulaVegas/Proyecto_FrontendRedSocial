@@ -1,26 +1,28 @@
 @use "../mixins" as m;
 
 .post-container {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+	@include m.flex-column;
+	gap: var(--spacing-md);
 	width: 100%;
 	align-items: center;
 
 	.post-card {
-		background: var(--calico-cream);
-		color: var(--calico-black);
-		border-radius: 12px;
-		padding: 0.75rem;
-		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-		transition: transform 0.2s ease;
-		display: flex;
-		flex-direction: column;
+		@include m.card-style;
+		background: var(--secondary);
+		color: var(--text);
+		border-radius: var(--border-radius-md);
+		padding: var(--spacing-md);
+		box-shadow: var(--shadow-md);
+		transition: all var(--transition-normal);
+		@include m.flex-column;
 		width: 100%;
 		max-width: 600px;
 		min-height: auto;
+		will-change: transform;
+		
 		&:hover {
 			transform: translateY(-2px);
+			box-shadow: var(--shadow-lg);
 		}
 
 		.post-title {
@@ -42,32 +44,32 @@
 
 		.post-image {
 			width: 100%;
-			aspect-ratio: 16/9;
+			@include m.aspect-ratio(16, 9);
 			object-fit: cover;
-			border-radius: 8px;
-			margin-bottom: 0.5rem;
+			border-radius: var(--border-radius-sm);
+			margin-bottom: var(--spacing-sm);
 			display: block;
 		}
 
 		.post-content {
-			font-size: 0.9rem;
-			line-height: 1.4;
-			color: var(--calico-black);
-			margin-bottom: 0.5rem;
+			font-size: var(--font-size-sm);
+			line-height: 1.5;
+			color: var(--text);
+			margin-bottom: var(--spacing-sm);
 		}
 
 		.post-author {
-			font-size: 0.8rem;
+			font-size: var(--font-size-xs);
 			font-style: italic;
-			color: var(--accent-blue);
+			color: var(--info);
 			margin-top: auto;
 			text-align: right;
 		}
 
 		.comments-count {
-			font-size: 0.85rem;
-			margin-top: 0.4rem;
-			color: var(--grey);
+			font-size: var(--font-size-xs);
+			margin-top: var(--spacing-sm);
+			color: var(--neutral);
 		}
 		.post-actions {
 			display: flex;

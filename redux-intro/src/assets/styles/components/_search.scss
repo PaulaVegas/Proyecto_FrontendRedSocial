@@ -1,85 +1,111 @@
+@use "../mixins" as m;
+
 .search-results {
-	padding: 2rem;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--spacing-md);
+}
 
-	.search-title {
-		margin-bottom: 1.5rem;
-		font-size: 1.8rem;
-		text-align: center;
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-		gap: 1.5rem;
-	}
-
-	.post-card {
-		background-color: #fff;
-		border-radius: 12px;
-		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		transition: transform 0.2s;
-
-		&:hover {
-			transform: translateY(-5px);
+.search-form-card {
+	@include m.card-style;
+	margin-bottom: var(--spacing-xl);
+	background: var(--secondary);
+	
+	.ant-form {
+		.ant-form-item {
+			margin-bottom: 0;
 		}
-
-		.post-image {
-			width: 100%;
-			height: 180px;
-			object-fit: cover;
+		
+		.ant-input {
+			@include m.input-style;
+			font-size: var(--font-size-base);
+			
+			&:focus {
+				border-color: var(--primary);
+				box-shadow: 0 0 0 2px rgba(224, 122, 95, 0.2);
+			}
 		}
-
-		.post-content {
-			padding: 1rem;
-
-			h3 {
-				margin: 0 0 0.5rem 0;
-				font-size: 1.2rem;
-			}
-
-			p {
-				margin-bottom: 0.8rem;
-				color: var(--grey);
-			}
-
-			.post-meta {
-				display: flex;
-				justify-content: space-between;
-				font-size: 0.9rem;
-				color: #888;
+		
+		.ant-btn-primary {
+			@include m.button-style;
+			background-color: var(--primary);
+			border-color: var(--primary);
+			
+			&:hover {
+				background-color: var(--text);
+				border-color: var(--text);
 			}
 		}
 	}
+}
 
-	.pagination-controls {
-		margin-top: 2rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 1rem;
+.search-title {
+	font-size: var(--font-size-2xl);
+	color: var(--text);
+	margin-bottom: var(--spacing-lg);
+	text-align: center;
+	
+	span {
+		font-size: var(--font-size-sm);
+		color: var(--neutral);
+		margin-left: var(--spacing-sm);
+	}
+}
 
-		button {
-			padding: 0.5rem 1rem;
-			border: none;
-			background-color: var(--grey);
-			color: var(--calico-white);
-			border-radius: 5px;
-			cursor: pointer;
+.posts-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: var(--spacing-lg);
+	margin-bottom: var(--spacing-xl);
+	
+	@include m.mobile {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-md);
+	}
+	
+	@include m.tablet {
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+}
 
-			&:disabled {
-				background-color: #ccc;
-				cursor: not-allowed;
+.pagination-wrapper {
+	@include m.flex-center;
+	margin-top: var(--spacing-xl);
+	
+	.ant-pagination {
+		.ant-pagination-item {
+			border-color: var(--accent);
+			
+			&:hover {
+				border-color: var(--primary);
+			}
+			
+			&.ant-pagination-item-active {
+				background-color: var(--primary);
+				border-color: var(--primary);
+			}
+		}
+		
+		.ant-pagination-prev,
+		.ant-pagination-next {
+			&:hover {
+				color: var(--primary);
 			}
 		}
 	}
+}
 
-	.loading,
-	.no-posts {
-		text-align: center;
-		font-size: 1.2rem;
-		color: var(--grey);
+// Estilos para Empty component
+.ant-empty {
+	.ant-empty-description {
+		color: var(--neutral);
+		font-size: var(--font-size-base);
+	}
+	
+	.ant-btn-primary {
+		@include m.button-style;
+		background-color: var(--primary);
+		border-color: var(--primary);
 	}
 }

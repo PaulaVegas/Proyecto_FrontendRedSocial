@@ -2,19 +2,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../../redux/auth/authSlice";
 import { useNavigate, Link } from "react-router-dom";
-import { notification, Form, Input, Button, Card } from "antd";
+import { Form, Input, Button, Card } from "antd";
+import { loginSchema } from "../../utils/validationSchemas";
+import { showNotification } from "../../utils/notifications";
+import { useAsyncOperation } from "../../hooks/useAsyncOperation";
 
 const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { isError, isSuccess, message } = useSelector((state) => state.auth);
+	const { execute, isLoading } = useAsyncOperation();
 
 	useEffect(() => {
 		if (isError) {
-			notification.error({ message: "Error", description: message });
+			showNotification.error(message);
 		}
 		if (isSuccess) {
-			notification.success({ message: "Success", description: message });
+			showNotification.success(message);
 			setTimeout(() => {
 				navigate("/profile");
 			}, 2000);
@@ -22,37 +26,67 @@ const Login = () => {
 		dispatch(reset());
 	}, [isError, isSuccess, message, dispatch, navigate]);
 
-	const onSubmit = (values) => {
-		dispatch(login(values));
+	const onSubmit = async (values) => {
+		await execute(
+			() => dispatch(login(values)).unwrap(),
+			{
+				showSuccessMessage: false, // Ya se maneja en useEffect
+				showErrorMessage: false, // Ya se maneja en useEffect
+			}
+		);
 	};
 
 	return (
 		<div className="auth-container">
 			<Card className="auth-card">
 				<h2 className="auth-title">Login to MeowSpace</h2>
-				<Form layout="vertical" onFinish={onSubmit}>
+				<Form 
+					layout="vertical" 
+					onFinish={onSubmit}
+					validateMessages={{
+						required: '${label} es obligatorio',
+						types: {
+							email: '${label} no es un email válido',
+						},
+					}}
+				>
 					<Form.Item
 						label="Email"
 						name="email"
-						rules={[{ required: true, message: "Please enter your email" }]}
+						rules={[
+							{ required: true },
+							{ type: "email" }
+						]}
 					>
-						<Input placeholder="Enter your email" />
+						<Input 
+							placeholder="Ingresa tu email" 
+							disabled={isLoading}
+						/>
 					</Form.Item>
 					<Form.Item
-						label="Password"
+						label="Contraseña"
 						name="password"
-						rules={[{ required: true, message: "Please enter your password" }]}
+						rules={[{ required: true }]}
 					>
-						<Input.Password placeholder="Enter your password" />
+						<Input.Password 
+							placeholder="Ingresa tu contraseña" 
+							disabled={isLoading}
+						/>
 					</Form.Item>
-					<Button type="primary" htmlType="submit" block>
-						Login
+					<Button 
+						type="primary" 
+						htmlType="submit" 
+						block 
+						loading={isLoading}
+						disabled={isLoading}
+					>
+						{isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
 					</Button>
 				</Form>
 				<p style={{ marginTop: "1rem", textAlign: "center" }}>
-					New to MeowSpace?{" "}
+					¿Nuevo en MeowSpace?{" "}
 					<Link to="/register">
-						<b>Sign Up</b>
+						<b>Regístrate</b>
 					</Link>
 				</p>
 			</Card>

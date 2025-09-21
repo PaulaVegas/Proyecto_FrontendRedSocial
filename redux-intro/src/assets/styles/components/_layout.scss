@@ -1,3 +1,5 @@
+@use "../mixins" as m;
+
 .app-layout {
 	min-height: 100vh;
 	display: flex;
@@ -7,71 +9,130 @@
 .app-content {
 	flex: 1;
 	display: flex;
-	background: var(--calico-white);
+	background: var(--bg);
 	padding-top: 64px;
 	width: 100%;
-	gap: 1rem;
+	gap: var(--spacing-md);
 	justify-content: center;
 	flex-wrap: wrap;
+	padding-left: var(--spacing-md);
+	padding-right: var(--spacing-md);
 }
 
 .page-main {
-	border-radius: 12px;
-	padding: 1rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	@include m.card-style;
 	flex: 1;
 	min-height: auto;
 	margin: 0;
+	max-width: 800px;
+	width: 100%;
 }
 
-.sidebar-right {
-	background: var(--primary-light);
-	border-radius: 12px;
-	padding: 1rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.sidebar-left {
+	background: var(--secondary);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-md);
+	box-shadow: var(--shadow-sm);
 	height: calc(100vh - 64px - 80px);
 	position: sticky;
 	top: 80px;
 	flex-shrink: 0;
-	width: 220px;
+	width: 260px;
+	overflow-y: auto;
+	
+	@include m.mobile {
+		display: none;
+	}
+}
+
+.sidebar-right {
+	background: var(--success);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-md);
+	box-shadow: var(--shadow-sm);
+	height: calc(100vh - 64px - 80px);
+	position: sticky;
+	top: 80px;
+	flex-shrink: 0;
+	width: 260px;
+	overflow-y: auto;
+	
+	@include m.mobile {
+		display: none;
+	}
 }
 
 .page-layout {
-	display: flex;
-	flex-direction: column;
+	@include m.flex-column;
 	align-items: center;
 	width: 100%;
 	min-height: auto;
 	background-color: var(--bg);
+	padding: var(--spacing-md);
 }
 
 .app-footer {
-	width: 100vw;
-	background: var(--primary-light);
+	width: 100%;
+	background: var(--success);
 	border-top: 2px solid var(--accent);
+	margin-top: auto;
 
 	.footer-inner {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 0.75rem 1.5rem;
+		padding: var(--spacing-md) var(--spacing-lg);
 		text-align: center;
 		font-weight: 600;
+		color: var(--text);
 	}
 }
 
-@media (max-width: 900px) {
+// === RESPONSIVE DESIGN ===
+@include m.mobile {
 	.app-content {
 		flex-direction: column;
-		padding: 0.5rem;
-	}
-
-	.sidebar-left,
-	.sidebar-right {
-		display: none;
+		padding: var(--spacing-sm);
+		gap: var(--spacing-sm);
 	}
 
 	.page-main {
 		width: 100%;
-		min-height: auto;
+		max-width: none;
+		padding: var(--spacing-sm);
+	}
+	
+	.page-layout {
+		padding: var(--spacing-sm);
+	}
+}
+
+@include m.tablet {
+	.app-content {
+		padding: var(--spacing-md);
+		gap: var(--spacing-md);
+	}
+	
+	.sidebar-left,
+	.sidebar-right {
+		width: 240px;
+	}
+}
+
+@include m.desktop {
+	.app-content {
+		padding: var(--spacing-lg);
+		gap: var(--spacing-lg);
+	}
+	
+	.sidebar-left,
+	.sidebar-right {
+		width: 260px;
+	}
+}
+
+@include m.large-desktop {
+	.app-content {
+		max-width: 1400px;
+		margin: 0 auto;
 	}
 }
